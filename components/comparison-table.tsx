@@ -82,7 +82,7 @@ export default function ComparisonTable() {
             <th className="relative w-1/3 p-5">
               <div className="pointer-events-none absolute -inset-y-1 right-0 left-0 border-x border-blue-100/50 bg-blue-50/50" />
               <div className="relative z-10 flex items-center gap-1.5">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-[#10B981]" />
+                <span className="h-2 w-2 rounded-full bg-[#10B981]" />
                 <span className="font-heading text-base font-extrabold tracking-tight text-slate-900">
                   Aliign<span className="text-[#10B981]">Data</span>
                 </span>

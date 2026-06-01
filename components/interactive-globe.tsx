@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useState } from "react"
+import Image from "next/image"
 import { Globe, MapPin, CheckCircle, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Badge from "@/components/ui/badge"
@@ -161,179 +162,7 @@ const hubs: Hub[] = [
 ]
 
 export default function InteractiveGlobe() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const [selectedRegion, setSelectedRegion] = useState("North America")
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let animationId: number
-    let width = (canvas.width = canvas.offsetWidth)
-    let height = (canvas.height = canvas.offsetHeight)
-
-    let angleY = 0 // Rotation angle around Y-axis
-    const angleX = 0.2 // Rotation angle around X-axis
-    const globeRadius = Math.min(width, height) * 0.38
-    const focalLength = 350
-    const centerX = width / 2
-    const centerY = height / 2
-
-    // Pre-calculate standard sphere points for dotted shell grid
-    const spherePoints: { lat: number; lng: number }[] = []
-    const latLines = 18
-    const lngLines = 24
-    for (let i = 0; i < latLines; i++) {
-      const lat = (Math.PI * i) / latLines - Math.PI / 2
-      for (let j = 0; j < lngLines; j++) {
-        const lng = (2 * Math.PI * j) / lngLines - Math.PI
-        spherePoints.push({ lat, lng })
-      }
-    }
-
-    const handleResize = () => {
-      if (!canvas) return
-      width = canvas.width = canvas.offsetWidth
-      height = canvas.height = canvas.offsetHeight
-    }
-    window.addEventListener("resize", handleResize)
-
-    // Animation Loop
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height)
-
-      // Auto rotate slowly
-      angleY += 0.0025
-
-      // Project and draw the dotted globe shell
-      spherePoints.forEach((point) => {
-        // Calculate 3D coordinates relative to center
-        const x = globeRadius * Math.cos(point.lat) * Math.sin(point.lng)
-        const y = globeRadius * Math.sin(point.lat)
-        const z = globeRadius * Math.cos(point.lat) * Math.cos(point.lng)
-
-        // Rotate around Y-axis
-        const xRotY = x * Math.cos(angleY) - z * Math.sin(angleY)
-        const zRotY = x * Math.sin(angleY) + z * Math.cos(angleY)
-
-        // Rotate around X-axis
-        const yRotX = y * Math.cos(angleX) - zRotY * Math.sin(angleX)
-        const zRotX = y * Math.sin(angleX) + zRotY * Math.cos(angleX)
-
-        // 3D perspective projection
-        const scale = focalLength / (focalLength + zRotX)
-        const px = centerX + xRotY * scale
-        const py = centerY + yRotX * scale
-
-        // Don't draw points behind the globe
-        if (zRotX < 0) {
-          const alpha = (1 - Math.abs(zRotX) / globeRadius) * 0.12
-          ctx.beginPath()
-          ctx.arc(px, py, 1, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(15, 23, 42, ${alpha * 0.45})`
-          ctx.fill()
-        }
-      })
-
-      // Project and draw Hub Coordinates
-      const projectedHubs = hubs.map((hub) => {
-        const x = globeRadius * Math.cos(hub.lat) * Math.sin(hub.lng)
-        const y = globeRadius * Math.sin(hub.lat)
-        const z = globeRadius * Math.cos(hub.lat) * Math.cos(hub.lng)
-
-        // Rotate Y
-        const xRotY = x * Math.cos(angleY) - z * Math.sin(angleY)
-        const zRotY = x * Math.sin(angleY) + z * Math.cos(angleY)
-
-        // Rotate X
-        const yRotX = y * Math.cos(angleX) - zRotY * Math.sin(angleX)
-        const zRotX = y * Math.sin(angleX) + zRotY * Math.cos(angleX)
-
-        const scale = focalLength / (focalLength + zRotX)
-        const px = centerX + xRotY * scale
-        const py = centerY + yRotX * scale
-
-        return { ...hub, px, py, pz: zRotX, visible: zRotX < 0 }
-      })
-
-      // Draw connection curves (data lines) between visible hubs
-      ctx.lineWidth = 0.8
-      for (let i = 0; i < projectedHubs.length; i++) {
-        for (let j = i + 1; j < projectedHubs.length; j++) {
-          const h1 = projectedHubs[i]
-          const h2 = projectedHubs[j]
-
-          if (h1.visible && h2.visible) {
-            // Draw connection line if they belong to active data streams
-            const isTarget =
-              h1.region === selectedRegion || h2.region === selectedRegion
-
-            if (isTarget || Math.random() < 0.15) {
-              const alpha = isTarget ? 0.22 : 0.08
-              ctx.strokeStyle = isTarget
-                ? "rgba(37, 99, 235, " + alpha + ")"
-                : "rgba(15, 23, 42, " + alpha * 0.3 + ")"
-              ctx.beginPath()
-
-              // Draw quadratic curve for curved data link appearance
-              const midX = (h1.px + h2.px) / 2
-              const midY = (h1.px + h2.px) / 2 - 25 // Arc upward
-              ctx.moveTo(h1.px, h1.py)
-              ctx.quadraticCurveTo(midX, midY, h2.px, h2.py)
-              ctx.stroke()
-            }
-          }
-        }
-      }
-
-      // Draw hub points
-      projectedHubs.forEach((hub) => {
-        if (!hub.visible) return
-
-        const isActive = hub.region === selectedRegion
-        const dotRadius = isActive ? 4.5 : 2.5
-        const color = isActive ? "#2563EB" : "#10B981"
-
-        // Center hub glow
-        ctx.beginPath()
-        ctx.arc(hub.px, hub.py, dotRadius * 2, 0, Math.PI * 2)
-        ctx.fillStyle = isActive
-          ? "rgba(37, 99, 235, 0.2)"
-          : "rgba(16, 185, 129, 0.1)"
-        ctx.fill()
-
-        // Hub point core
-        ctx.beginPath()
-        ctx.arc(hub.px, hub.py, dotRadius, 0, Math.PI * 2)
-        ctx.fillStyle = color
-        ctx.shadowBlur = isActive ? 8 : 4
-        ctx.shadowColor = color
-        ctx.fill()
-        ctx.shadowBlur = 0
-
-        // Draw names for selected hubs
-        if (isActive) {
-          ctx.fillStyle = "#0F172A"
-          ctx.font = "bold 9px Inter, sans-serif"
-          ctx.fillText(hub.name, hub.px + 8, hub.py - 3)
-          ctx.fillStyle = "rgba(37, 99, 235, 0.85)"
-          ctx.font = "8px monospace"
-          ctx.fillText(hub.records, hub.px + 8, hub.py + 7)
-        }
-      })
-
-      animationId = requestAnimationFrame(draw)
-    }
-
-    draw()
-
-    return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [selectedRegion])
 
   return (
     <Card
@@ -349,7 +178,7 @@ export default function InteractiveGlobe() {
         <div className="flex justify-start">
           <Badge
             variant="green"
-            icon={<Globe className="animate-spin-slow h-4 w-4" />}
+            icon={<Globe className="h-4 w-4" />}
           >
             MULTINATIONAL B2B INTELLIGENCE
           </Badge>
@@ -408,8 +237,8 @@ export default function InteractiveGlobe() {
         </div>
       </div>
 
-      {/* Right Column: Globe Canvas */}
-      <div className="relative flex h-[320px] w-full items-center justify-center md:h-[450px] lg:col-span-7">
+      {/* Right Column: Premium World Map Illustration */}
+      <div className="relative flex h-[320px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50 md:h-[450px] lg:col-span-7">
         {/* Detail Float Box */}
         <Card
           hoverable={false}
@@ -444,7 +273,15 @@ export default function InteractiveGlobe() {
           </a>
         </Card>
 
-        <canvas ref={canvasRef} className="block h-full w-full" />
+        <div className="relative h-full w-full overflow-hidden p-2">
+          <Image
+            src="/global_coverage_map.png"
+            alt="Global Coverage Map"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
       </div>
     </Card>
   )

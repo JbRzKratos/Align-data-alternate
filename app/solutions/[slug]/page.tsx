@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import Script from "next/script"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import {
@@ -155,15 +156,18 @@ export default async function SolutionPage({
   return (
     <>
       {/* Dynamic SEO Schemas */}
-      <script
+      <Script
+        id="service-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <script
+      <Script
+        id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <script
+      <Script
+        id="solution-faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

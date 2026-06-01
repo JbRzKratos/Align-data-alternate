@@ -55,7 +55,7 @@ export default function CTASection({
         {layout === "split" ? (
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
             {/* Left: Messaging */}
-            <div className="flex animate-in flex-col gap-6 text-left duration-300 fade-in slide-in-from-left lg:col-span-6">
+            <div className="flex flex-col gap-6 text-left lg:col-span-6">
               <div className="flex items-center justify-start gap-3">
                 <Logo />
                 <span className="text-slate-300" aria-hidden="true">
@@ -92,12 +92,12 @@ export default function CTASection({
             </div>
 
             {/* Right: Form */}
-            <div className="animate-in duration-300 fade-in slide-in-from-right lg:col-span-6">
+            <div className="lg:col-span-6">
               <LeadForm defaultSolution={defaultSolution} />
             </div>
           </div>
         ) : (
-          <div className="mx-auto flex max-w-3xl animate-in flex-col items-center gap-6 text-center duration-300 fade-in zoom-in">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <div className="mb-1 flex justify-center">
               <Badge variant={badgeVariant}>{badge}</Badge>
             </div>

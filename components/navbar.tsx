@@ -128,7 +128,7 @@ export default function Navbar() {
               {dropdownOpen && (
                 <div className="absolute top-full left-1/2 z-50 -translate-x-1/2 pt-2">
                   <div
-                    className="w-[580px] animate-in rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.12)] duration-200 fade-in-0 zoom-in-95"
+                    className="w-[580px] rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.12)]"
                     role="menu"
                   >
                     <div className="mb-4 border-b border-slate-100 pb-2">

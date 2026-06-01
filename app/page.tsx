@@ -1,5 +1,7 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
+import Script from "next/script"
 import type { Metadata } from "next"
 import {
   Database,
@@ -32,7 +34,6 @@ import {
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import NetworkVisual from "@/components/network-visual"
 import UniverseMap from "@/components/universe-map"
 import ComparisonTable from "@/components/comparison-table"
 import InteractiveGlobe from "@/components/interactive-globe"
@@ -139,15 +140,18 @@ export default function Page() {
   return (
     <>
       {/* Schema Injection */}
-      <script
+      <Script
+        id="org-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }}
       />
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
       />
-      <script
+      <Script
+        id="website-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
       />
@@ -184,7 +188,7 @@ export default function Page() {
                   variant="blue"
                   icon={
                     <Sparkles
-                      className="animate-pulse text-emerald-600"
+                      className="text-emerald-600"
                       aria-hidden="true"
                     />
                   }
@@ -197,7 +201,7 @@ export default function Page() {
                 className="font-heading text-4xl leading-tight font-extrabold tracking-tight text-[#0F172A] md:text-5xl lg:text-6xl"
               >
                 Find Companies{" "}
-                <span className="bg-gradient-to-r from-[#2563EB] to-[#10B981] bg-clip-text text-transparent">
+                <span className="text-[#2563EB]">
                   Ready To Buy
                 </span>{" "}
                 Before Competitors Do.
@@ -240,12 +244,28 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right: Network Visualizer */}
+            {/* Right: Dashboard Mockup Illustration */}
             <div
-              className="h-[400px] w-full md:h-[500px] lg:col-span-6"
+              className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] p-2 shadow-sm md:h-[450px] lg:col-span-6"
               aria-hidden="true"
             >
-              <NetworkVisual />
+              <div className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-full border border-slate-200/65 bg-white/85 px-3 py-1 font-mono text-[10px] text-[#2563EB] shadow-sm backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
+                REVENUE INTELLIGENCE STREAMING
+              </div>
+              <div className="absolute right-4 bottom-4 z-10 font-mono text-[10px] text-slate-400">
+                75M+ NODES // 95% VERIFIED
+              </div>
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  src="/hero_dashboard.png"
+                  alt="Revenue Intelligence Dashboard Mockup"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </section>

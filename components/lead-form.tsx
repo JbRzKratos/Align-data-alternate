@@ -121,7 +121,7 @@ export default function LeadForm({ defaultSolution = "" }: LeadFormProps) {
         />
 
         {isSuccess ? (
-          <div className="flex animate-in flex-col items-center py-10 text-center duration-300 fade-in zoom-in">
+          <div className="flex flex-col items-center py-10 text-center">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-brand-green/20 bg-brand-green/10 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
               <CheckCircle2
                 className="h-8 w-8 text-brand-green"
@@ -212,7 +212,7 @@ export default function LeadForm({ defaultSolution = "" }: LeadFormProps) {
 
             {/* Step 1: Basic Information */}
             {step === 1 && (
-              <div className="flex animate-in flex-col gap-4 duration-200 fade-in slide-in-from-right-3">
+              <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">
                   <Label
                     htmlFor={`${formId}-fullName`}
@@ -261,7 +261,7 @@ export default function LeadForm({ defaultSolution = "" }: LeadFormProps) {
 
             {/* Step 2: Company & Choice */}
             {step === 2 && (
-              <div className="flex animate-in flex-col gap-4 duration-200 fade-in slide-in-from-right-3">
+              <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">
                   <Label
                     htmlFor={`${formId}-company`}
@@ -311,7 +311,7 @@ export default function LeadForm({ defaultSolution = "" }: LeadFormProps) {
 
             {/* Step 3: Audience & Target */}
             {step === 3 && (
-              <div className="flex animate-in flex-col gap-4 duration-200 fade-in slide-in-from-right-3">
+              <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">
                   <Label
                     htmlFor={`${formId}-phone`}

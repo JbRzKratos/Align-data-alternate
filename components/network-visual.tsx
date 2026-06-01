@@ -39,9 +39,21 @@ export default function NetworkVisual() {
     // Clusters configuration: 1 = Tech (blue), 2 = Healthcare (green), 3 = Finance (purple)
     const clusterColors = ["#00A8FF", "#00D084", "#6366F1"]
     const labels = [
-      "Microsoft", "Google", "Stripe", "Apple", "Oracle",
-      "Mayo Clinic", "Pfizer", "Novartis", "Kaiser", "Moderna",
-      "Goldman Sachs", "Fidelity", "Visa", "BlackRock", "Coinbase"
+      "Microsoft",
+      "Google",
+      "Stripe",
+      "Apple",
+      "Oracle",
+      "Mayo Clinic",
+      "Pfizer",
+      "Novartis",
+      "Kaiser",
+      "Moderna",
+      "Goldman Sachs",
+      "Fidelity",
+      "Visa",
+      "BlackRock",
+      "Coinbase",
     ]
 
     const nodes: Node[] = []
@@ -126,9 +138,10 @@ export default function NetworkVisual() {
         const dx = mouseRef.current.x - node.x
         const dy = mouseRef.current.y - node.y
         const dist = Math.sqrt(dx * dx + dy * dy)
-        
+
         if (dist < mouseRef.current.radius) {
-          const force = (mouseRef.current.radius - dist) / mouseRef.current.radius
+          const force =
+            (mouseRef.current.radius - dist) / mouseRef.current.radius
           node.x -= (dx / dist) * force * 0.8
           node.y -= (dy / dist) * force * 0.8
         }
@@ -168,7 +181,7 @@ export default function NetworkVisual() {
 
           // Limit connection distance, prioritize connections within the same cluster
           const maxDist = n1.cluster === n2.cluster ? 130 : 70
-          
+
           if (dist < maxDist) {
             const alpha = (1 - dist / maxDist) * 0.18
             ctx.strokeStyle = `rgba(15, 23, 42, ${alpha * 0.45})`
@@ -229,16 +242,16 @@ export default function NetworkVisual() {
   }, [])
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] rounded-2xl border border-slate-200/60 shadow-sm">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] shadow-sm">
       {/* Absolute overlay elements for UI touch */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 bg-white/80 border border-slate-200/65 rounded-full text-[10px] font-mono text-[#2563EB] shadow-sm backdrop-blur-md">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse" />
+      <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full border border-slate-200/65 bg-white/80 px-3 py-1 font-mono text-[10px] text-[#2563EB] shadow-sm backdrop-blur-md">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#2563EB]" />
         REVENUE INTELLIGENCE STREAMING
       </div>
-      <div className="absolute bottom-4 right-4 text-[10px] font-mono text-slate-400">
+      <div className="absolute right-4 bottom-4 font-mono text-[10px] text-slate-400">
         75M+ NODES // 95% VERIFIED
       </div>
-      <canvas ref={canvasRef} className="w-full h-full block" />
+      <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   )
 }

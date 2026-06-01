@@ -1,7 +1,17 @@
 "use client"
 
 import React, { useState } from "react"
-import { Shield, Cpu, Landmark, Hammer, GraduationCap, ShoppingBag, CheckCircle, MapPin, Sparkles } from "lucide-react"
+import {
+  Shield,
+  Cpu,
+  Landmark,
+  Hammer,
+  GraduationCap,
+  ShoppingBag,
+  CheckCircle,
+  MapPin,
+  Sparkles,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import Badge from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
@@ -28,7 +38,13 @@ export default function UniverseMap() {
       icon: <Cpu className="h-5 w-5" />,
       totalContacts: "18.4M+ Contacts",
       totalCompanies: "420K+ Companies",
-      decisionMakers: ["CTOs", "VP of Engineering", "IT Directors", "CISOs", "Product Managers"],
+      decisionMakers: [
+        "CTOs",
+        "VP of Engineering",
+        "IT Directors",
+        "CISOs",
+        "Product Managers",
+      ],
       regions: "North America, Europe, Asia Pacific, LATAM",
       availability: [
         { label: "Verified Emails", pct: 98 },
@@ -38,7 +54,8 @@ export default function UniverseMap() {
       ],
       accentColor: "#00A8FF",
       bgColor: "rgba(0, 168, 255, 0.1)",
-      summary: "In-depth technographic mapping of companies based on installed cloud software, dev stacks, hardware footprint, and cybersecurity frameworks.",
+      summary:
+        "In-depth technographic mapping of companies based on installed cloud software, dev stacks, hardware footprint, and cybersecurity frameworks.",
     },
     {
       id: "healthcare",
@@ -46,7 +63,13 @@ export default function UniverseMap() {
       icon: <Shield className="h-5 w-5" />,
       totalContacts: "12.1M+ Contacts",
       totalCompanies: "180K+ Companies",
-      decisionMakers: ["Hospital Directors", "Chief Medical Officers", "Physicians", "Purchasing Agents", "Registered Nurses"],
+      decisionMakers: [
+        "Hospital Directors",
+        "Chief Medical Officers",
+        "Physicians",
+        "Purchasing Agents",
+        "Registered Nurses",
+      ],
       regions: "United States, Canada, Europe",
       availability: [
         { label: "Verified Emails", pct: 96 },
@@ -56,7 +79,8 @@ export default function UniverseMap() {
       ],
       accentColor: "#00D084",
       bgColor: "rgba(0, 208, 132, 0.1)",
-      summary: "Direct NPI-verified databases covering licensed physicians, surgeons, administrators, and device procurement buyers, refreshed every 30 days.",
+      summary:
+        "Direct NPI-verified databases covering licensed physicians, surgeons, administrators, and device procurement buyers, refreshed every 30 days.",
     },
     {
       id: "finance",
@@ -64,7 +88,13 @@ export default function UniverseMap() {
       icon: <Landmark className="h-5 w-5" />,
       totalContacts: "8.7M+ Contacts",
       totalCompanies: "115K+ Companies",
-      decisionMakers: ["Chief Financial Officers", "Investment Partners", "Risk Managers", "Treasury Directors", "Compliance Officers"],
+      decisionMakers: [
+        "Chief Financial Officers",
+        "Investment Partners",
+        "Risk Managers",
+        "Treasury Directors",
+        "Compliance Officers",
+      ],
       regions: "Global (EMEA, North America, APAC)",
       availability: [
         { label: "Verified Emails", pct: 97 },
@@ -74,7 +104,8 @@ export default function UniverseMap() {
       ],
       accentColor: "#6366F1",
       bgColor: "rgba(99, 102, 241, 0.1)",
-      summary: "Target institutional capital allocators, portfolio managers, wealth managers, and executive-level finance leads segmented by asset class and AUM.",
+      summary:
+        "Target institutional capital allocators, portfolio managers, wealth managers, and executive-level finance leads segmented by asset class and AUM.",
     },
     {
       id: "manufacturing",
@@ -82,7 +113,13 @@ export default function UniverseMap() {
       icon: <Hammer className="h-5 w-5" />,
       totalContacts: "9.2M+ Contacts",
       totalCompanies: "210K+ Companies",
-      decisionMakers: ["VP of Operations", "Supply Chain Managers", "Plant Managers", "Procurement Officers", "EHS Directors"],
+      decisionMakers: [
+        "VP of Operations",
+        "Supply Chain Managers",
+        "Plant Managers",
+        "Procurement Officers",
+        "EHS Directors",
+      ],
       regions: "North America, Central Europe, East Asia",
       availability: [
         { label: "Verified Emails", pct: 95 },
@@ -92,7 +129,8 @@ export default function UniverseMap() {
       ],
       accentColor: "#F59E0B",
       bgColor: "rgba(245, 158, 11, 0.1)",
-      summary: "Reach operational and facility leaders running industrial sites, automotive hubs, logistics docks, and complex parts manufacturing lines.",
+      summary:
+        "Reach operational and facility leaders running industrial sites, automotive hubs, logistics docks, and complex parts manufacturing lines.",
     },
     {
       id: "education",
@@ -100,7 +138,13 @@ export default function UniverseMap() {
       icon: <GraduationCap className="h-5 w-5" />,
       totalContacts: "6.5M+ Contacts",
       totalCompanies: "85K+ Institutions",
-      decisionMakers: ["Superintendents", "University Deans", "IT Procurement", "Provosts", "K-12 Principals"],
+      decisionMakers: [
+        "Superintendents",
+        "University Deans",
+        "IT Procurement",
+        "Provosts",
+        "K-12 Principals",
+      ],
       regions: "United States, Canada, United Kingdom",
       availability: [
         { label: "Verified Emails", pct: 94 },
@@ -110,7 +154,8 @@ export default function UniverseMap() {
       ],
       accentColor: "#EC4899",
       bgColor: "rgba(236, 72, 153, 0.1)",
-      summary: "Direct contacts within primary, secondary, and higher-education structures, mapped by institutional size, funding sources, and student capacity.",
+      summary:
+        "Direct contacts within primary, secondary, and higher-education structures, mapped by institutional size, funding sources, and student capacity.",
     },
     {
       id: "retail",
@@ -118,7 +163,13 @@ export default function UniverseMap() {
       icon: <ShoppingBag className="h-5 w-5" />,
       totalContacts: "7.9M+ Contacts",
       totalCompanies: "130K+ Companies",
-      decisionMakers: ["Heads of Merchandising", "E-commerce Managers", "CMOs", "Logistics Leads", "Category Buyers"],
+      decisionMakers: [
+        "Heads of Merchandising",
+        "E-commerce Managers",
+        "CMOs",
+        "Logistics Leads",
+        "Category Buyers",
+      ],
       regions: "Global Reach",
       availability: [
         { label: "Verified Emails", pct: 98 },
@@ -128,16 +179,17 @@ export default function UniverseMap() {
       ],
       accentColor: "#14B8A6",
       bgColor: "rgba(20, 184, 166, 0.1)",
-      summary: "Tap into brands using advanced e-commerce platforms (Shopify Plus, Magento, Salesforce Commerce) and their marketing and supply chain executives.",
+      summary:
+        "Tap into brands using advanced e-commerce platforms (Shopify Plus, Magento, Salesforce Commerce) and their marketing and supply chain executives.",
     },
   ]
 
   const [selectedInd, setSelectedInd] = useState<IndustryData>(industries[0])
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+    <div className="grid w-full grid-cols-1 items-stretch gap-8 lg:grid-cols-12">
       {/* Industry Sidebar Selectors */}
-      <div className="lg:col-span-4 flex flex-col gap-3">
+      <div className="flex flex-col gap-3 lg:col-span-4">
         {industries.map((ind) => {
           const isSelected = selectedInd.id === ind.id
           return (
@@ -145,17 +197,19 @@ export default function UniverseMap() {
               key={ind.id}
               onClick={() => setSelectedInd(ind)}
               className={cn(
-                "w-full text-left p-4 rounded-xl transition-all duration-350 flex items-center justify-between border cursor-pointer group",
+                "group flex w-full cursor-pointer items-center justify-between rounded-xl border p-4 text-left transition-all duration-350",
                 isSelected
-                  ? "bg-white border-slate-200 shadow-sm"
-                  : "bg-transparent border-transparent hover:bg-slate-100/50"
+                  ? "border-slate-200 bg-white shadow-sm"
+                  : "border-transparent bg-transparent hover:bg-slate-100/50"
               )}
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="p-2.5 rounded-lg transition-colors"
+                  className="rounded-lg p-2.5 transition-colors"
                   style={{
-                    backgroundColor: isSelected ? ind.bgColor : "rgba(15, 23, 42, 0.03)",
+                    backgroundColor: isSelected
+                      ? ind.bgColor
+                      : "rgba(15, 23, 42, 0.03)",
                     color: isSelected ? ind.accentColor : "#64748B",
                   }}
                 >
@@ -165,12 +219,16 @@ export default function UniverseMap() {
                   <h4
                     className={cn(
                       "text-sm font-semibold transition-colors",
-                      isSelected ? "text-slate-900" : "text-slate-500 group-hover:text-slate-900"
+                      isSelected
+                        ? "text-slate-900"
+                        : "text-slate-500 group-hover:text-slate-900"
                     )}
                   >
                     {ind.name}
                   </h4>
-                  <span className="text-[11px] text-slate-400">{ind.totalContacts}</span>
+                  <span className="text-[11px] text-slate-400">
+                    {ind.totalContacts}
+                  </span>
                 </div>
               </div>
               <div
@@ -186,10 +244,13 @@ export default function UniverseMap() {
       </div>
 
       {/* Universe Visualization and Details */}
-      <Card hoverable={false} className="lg:col-span-8 relative flex flex-col justify-between p-6 md:p-8 overflow-hidden">
+      <Card
+        hoverable={false}
+        className="relative flex flex-col justify-between overflow-hidden p-6 md:p-8 lg:col-span-8"
+      >
         {/* Animated background accent */}
         <div
-          className="absolute -top-24 -right-24 h-48 w-48 rounded-full blur-[80px] opacity-25 pointer-events-none transition-all duration-500"
+          className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-25 blur-[80px] transition-all duration-500"
           style={{ backgroundColor: selectedInd.accentColor }}
         />
 
@@ -197,27 +258,25 @@ export default function UniverseMap() {
           {/* Top Panel: Title and Summary */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <Badge variant="blue">
-                {selectedInd.name} Universe
-              </Badge>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <Badge variant="blue">{selectedInd.name} Universe</Badge>
+              <span className="font-mono text-[10px] text-slate-400">
                 95% ACCURACY GUARANTEED
               </span>
             </div>
-            <h3 className="font-heading font-extrabold text-2xl md:text-3xl text-slate-900 tracking-tight mt-1">
+            <h3 className="mt-1 font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
               {selectedInd.totalContacts} Across {selectedInd.totalCompanies}
             </h3>
-            <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mt-1">
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
               {selectedInd.summary}
             </p>
           </div>
 
           {/* Grid Panel: Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+          <div className="mt-2 grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Left side: Decision Makers & Regions */}
             <div className="flex flex-col gap-5">
               <div>
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3">
+                <h5 className="mb-3 text-[11px] font-bold tracking-widest text-slate-500 uppercase">
                   Verified Decision Makers
                 </h5>
                 <div className="flex flex-wrap gap-2">
@@ -225,8 +284,10 @@ export default function UniverseMap() {
                     <Badge
                       key={title}
                       variant="gray"
-                      icon={<CheckCircle className="h-3 w-3 text-emerald-600" />}
-                      className="normal-case text-xs font-semibold"
+                      icon={
+                        <CheckCircle className="h-3 w-3 text-emerald-600" />
+                      }
+                      className="text-xs font-semibold normal-case"
                     >
                       {title}
                     </Badge>
@@ -235,7 +296,7 @@ export default function UniverseMap() {
               </div>
 
               <div>
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                <h5 className="mb-2 text-[11px] font-bold tracking-widest text-slate-500 uppercase">
                   Regional Focus
                 </h5>
                 <div className="flex items-center gap-2 text-xs text-slate-700">
@@ -246,8 +307,8 @@ export default function UniverseMap() {
             </div>
 
             {/* Right side: Field Accuracy Gauges */}
-            <div className="flex flex-col gap-4 bg-slate-50 border border-slate-200/60 rounded-xl p-4">
-              <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
+            <div className="flex flex-col gap-4 rounded-xl border border-slate-200/60 bg-slate-50 p-4">
+              <h5 className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-slate-500 uppercase">
                 <Sparkles className="h-3.5 w-3.5 text-[#2563EB]" />
                 Data Completeness Rate
               </h5>
@@ -256,9 +317,11 @@ export default function UniverseMap() {
                   <div key={field.label} className="flex flex-col gap-1">
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-500">{field.label}</span>
-                      <span className="font-bold text-slate-900">{field.pct}%</span>
+                      <span className="font-bold text-slate-900">
+                        {field.pct}%
+                      </span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-200/60 rounded-full overflow-hidden">
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200/60">
                       <div
                         className="h-full rounded-full transition-all duration-700 ease-out"
                         style={{
@@ -276,16 +339,18 @@ export default function UniverseMap() {
         </div>
 
         {/* Action / Learn More */}
-        <div className="mt-8 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-[11px] text-slate-400 font-mono">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-4 sm:flex-row">
+          <div className="font-mono text-[11px] text-slate-400">
             UPDATED: 30-DAY CYCLES // SOC-2 SECURED
           </div>
           <a
             href="#contact"
-            className="text-xs font-semibold text-slate-800 hover:text-[#2563EB] flex items-center gap-1 group transition-colors"
+            className="group flex items-center gap-1 text-xs font-semibold text-slate-800 transition-colors hover:text-[#2563EB]"
           >
             Request sample data for {selectedInd.name}
-            <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span className="transition-transform group-hover:translate-x-1">
+              &rarr;
+            </span>
           </a>
         </div>
       </Card>

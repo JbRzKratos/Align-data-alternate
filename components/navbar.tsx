@@ -1,374 +1,310 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronDown, Menu, X, ArrowRight, Shield, Database, Sparkles, Building, Globe, Mail } from "lucide-react"
+import {
+  ArrowRight,
+  Database,
+  Shield,
+  Mail,
+  Building,
+  Globe,
+  Sparkles,
+  Menu,
+  ChevronDown,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+  SheetFooter,
+} from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import Logo from "@/components/ui/logo"
+import {
+  NAV_SOLUTIONS,
+  NAV_INDUSTRIES,
+  NAV_RESOURCES,
+} from "@/content/navigation"
 
-interface RouteItem {
-  name: string
-  href: string
-  description?: string
-  icon?: React.ReactNode
+// Icon map for nav solution items
+const ICON_MAP: Record<string, React.ReactNode> = {
+  Database: <Database className="h-5 w-5" />,
+  Shield: <Shield className="h-5 w-5" />,
+  Mail: <Mail className="h-5 w-5" />,
+  Building: <Building className="h-5 w-5" />,
+  Sparkles: <Sparkles className="h-5 w-5" />,
+  Globe: <Globe className="h-5 w-5" />,
 }
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
-    window.addEventListener("scroll", handleScroll)
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const solutions: RouteItem[] = [
-    {
-      name: "Technology Users Database",
-      href: "/solutions/technology-users-database",
-      description: "Target companies using specific hardware or software stacks.",
-      icon: <Database className="h-5 w-5 text-brand-blue" />,
-    },
-    {
-      name: "Healthcare Database",
-      href: "/solutions/healthcare-database",
-      description: "Access verified doctors, hospital administrators, and practitioners.",
-      icon: <Shield className="h-5 w-5 text-brand-blue" />,
-    },
-    {
-      name: "Professional Email Lists",
-      href: "/solutions/professional-email-lists",
-      description: "Premium corporate contacts segmentable by title and seniority.",
-      icon: <Mail className="h-5 w-5 text-brand-blue" />,
-    },
-    {
-      name: "Industry Databases",
-      href: "/solutions/industry-databases",
-      description: "Deep coverage across specific trade, commerce, and manufacturing fields.",
-      icon: <Building className="h-5 w-5 text-brand-blue" />,
-    },
-    {
-      name: "Data Appending",
-      href: "/solutions/data-appending",
-      description: "Clean, match, and enrich your existing contacts with 95% accuracy.",
-      icon: <Sparkles className="h-5 w-5 text-brand-blue" />,
-    },
-    {
-      name: "Regional Databases",
-      href: "/solutions/regional-databases",
-      description: "Global geographic data segments across 100+ countries.",
-      icon: <Globe className="h-5 w-5 text-brand-blue" />,
-    },
-  ]
-
-  const industries = [
-    { name: "Healthcare", href: "/#industries" },
-    { name: "Technology", href: "/#industries" },
-    { name: "Finance", href: "/#industries" },
-    { name: "Manufacturing", href: "/#industries" },
-    { name: "Education", href: "/#industries" },
-    { name: "Retail", href: "/#industries" },
-    { name: "Construction", href: "/#industries" },
-    { name: "Logistics", href: "/#industries" },
-  ]
-
-  const resources = [
-    { name: "Blog", href: "/#resources" },
-    { name: "Case Studies", href: "/#results" },
-    { name: "Guides", href: "/#resources" },
-    { name: "FAQ", href: "/#faq" },
-  ]
-
-  const handleDropdownHover = (menu: string) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
-    setActiveDropdown(menu)
-  }
-
-  const handleDropdownLeave = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-    timeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null)
-    }, 150)
-  }
-
-  // Clear timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [])
-
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-        scrolled
-          ? "bg-white/90 backdrop-blur-md border-slate-200/65 py-3 shadow-sm"
-          : "bg-transparent border-transparent py-5"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
-        {/* Logo */}
-        <Logo />
+    <>
+      {/* Skip to content — accessibility */}
+      <a
+        href="#main-content"
+        className="absolute -m-px h-px w-px overflow-hidden border-0 p-0 whitespace-nowrap focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:h-auto focus:w-auto focus:overflow-visible focus:rounded-lg focus:bg-brand-blue focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-8">
-          {/* Solutions Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleDropdownHover("solutions")}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <button className="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-slate-900 py-2 transition-colors cursor-pointer">
-              Solutions
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 text-slate-500 transition-transform duration-200",
-                  activeDropdown === "solutions" && "rotate-180 text-brand-blue"
-                )}
-              />
-            </button>
-            {activeDropdown === "solutions" && (
-              <div 
-                className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[580px] z-50 animate-in fade-in slide-in-from-top-3 duration-250"
-                onMouseEnter={() => handleDropdownHover("solutions")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <div className="rounded-xl bg-white border border-slate-200/80 p-6 shadow-2xl grid grid-cols-2 gap-4">
-                  <div className="col-span-2 pb-2 border-b border-slate-100 mb-1">
-                    <span className="text-xs font-semibold text-[#2563EB] tracking-wider uppercase">
-                      Our Data Solutions
-                    </span>
-                  </div>
-                  {solutions.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors group/item"
-                    >
-                      <div className="p-2 rounded bg-blue-50 text-[#2563EB] group-hover/item:bg-blue-100 transition-colors">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-semibold text-slate-900 group-hover/item:text-[#2563EB] transition-colors">
-                          {item.name}
-                        </h4>
-                        <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                          {item.description}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Industries Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleDropdownHover("industries")}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <button className="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-slate-900 py-2 transition-colors cursor-pointer">
-              Industries
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 text-slate-500 transition-transform duration-200",
-                  activeDropdown === "industries" && "rotate-180 text-brand-blue"
-                )}
-              />
-            </button>
-            {activeDropdown === "industries" && (
-              <div 
-                className="absolute top-full left-0 pt-2 w-[240px] z-50 animate-in fade-in slide-in-from-top-3 duration-250"
-                onMouseEnter={() => handleDropdownHover("industries")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <div className="rounded-xl bg-white border border-slate-200/80 p-4 shadow-2xl grid grid-cols-1 gap-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 pb-2 border-b border-slate-100 mb-1">
-                    Target Industries
-                  </span>
-                  {industries.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="text-sm text-slate-600 hover:text-[#10B981] px-3 py-2 rounded-lg hover:bg-slate-50 transition-all font-medium"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Resources Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleDropdownHover("resources")}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <button className="flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-slate-900 py-2 transition-colors cursor-pointer">
-              Resources
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 text-slate-500 transition-transform duration-200",
-                  activeDropdown === "resources" && "rotate-180 text-brand-blue"
-                )}
-              />
-            </button>
-            {activeDropdown === "resources" && (
-              <div 
-                className="absolute top-full left-0 pt-2 w-[200px] z-50 animate-in fade-in slide-in-from-top-3 duration-250"
-                onMouseEnter={() => handleDropdownHover("resources")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <div className="rounded-xl bg-white border border-slate-200/80 p-4 shadow-2xl grid grid-cols-1 gap-1">
-                  {resources.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="text-sm text-slate-600 hover:text-[#2563EB] px-3 py-2 rounded-lg hover:bg-slate-50 transition-all font-medium"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <Link href="/#faq" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">
-            About
-          </Link>
-          <Link href="/#contact" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">
-            Contact
-          </Link>
-        </div>
-
-        {/* CTA Button */}
-        <div className="hidden lg:flex items-center gap-4">
-          <Link href="/#contact">
-            <Button variant="secondary" className="px-5">
-              Request Sample Data
-            </Button>
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden text-slate-600 hover:text-slate-900 cursor-pointer"
-          aria-label="Toggle navigation menu"
+      {/* Floating Capsule Header */}
+      <header
+        role="banner"
+        className="fixed top-4 right-0 left-0 z-50 px-4 transition-all duration-300 md:px-8"
+      >
+        <div
+          className={cn(
+            "relative mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200 bg-white/95 px-6 py-2 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-md transition-all duration-300",
+            scrolled
+              ? "border-slate-200/85 bg-white/98 py-2 shadow-[0_12px_40px_rgba(15,23,42,0.08)]"
+              : "border-slate-200/70 bg-white/92 py-3"
+          )}
         >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Drawer */}
-      {isOpen && (
-        <div className="lg:hidden fixed inset-0 top-[60px] bg-white border-t border-slate-200 z-45 p-6 flex flex-col overflow-y-auto">
-          {/* Solutions Section */}
-          <div className="mb-6">
-            <h3 className="text-xs font-semibold text-brand-blue tracking-wider uppercase mb-3">
-              Solutions
-            </h3>
-            <div className="grid grid-cols-1 gap-2 pl-2">
-              {solutions.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 py-2 text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
-                >
-                  <span className="p-1 rounded bg-brand-blue/10">{item.icon}</span>
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+          {/* Left Section: Logo */}
+          <div className="flex-shrink-0">
+            <Logo />
           </div>
 
-          {/* Industries Section */}
-          <div className="mb-6">
-            <h3 className="text-xs font-semibold text-brand-green tracking-wider uppercase mb-3">
-              Industries
-            </h3>
-            <div className="grid grid-cols-2 gap-2 pl-2">
-              {industries.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="py-1 text-sm text-slate-500 hover:text-slate-900 transition-colors font-medium"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Resources & Links Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-slate-400 tracking-wider uppercase mb-3">
-              Company & Resources
-            </h3>
-            <div className="grid grid-cols-2 gap-2 pl-2">
-              {resources.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="py-1 text-sm text-slate-500 hover:text-slate-900 transition-colors font-medium"
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <Link
-                href="/#faq"
-                onClick={() => setIsOpen(false)}
-                className="py-1 text-sm text-slate-500 hover:text-slate-900 transition-colors col-span-2 font-medium"
-              >
-                About
-              </Link>
-              <Link
-                href="/#contact"
-                onClick={() => setIsOpen(false)}
-                className="py-1 text-sm text-slate-500 hover:text-slate-900 transition-colors col-span-2 font-medium"
-              >
-                Contact
-              </Link>
-            </div>
-          </div>
-
-          {/* CTA Mobile */}
-          <div className="mt-auto">
-            <Link href="/#contact" onClick={() => setIsOpen(false)} className="w-full">
-              <Button variant="primary" size="lg" className="w-full">
-                Request Sample Data
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+          {/* Middle Section: Centered Desktop Navigation */}
+          <nav
+            className="mx-6 hidden flex-grow items-center justify-center gap-2 lg:flex xl:gap-4"
+            aria-label="Primary navigation"
+          >
+            {/* Home Link */}
+            <Link
+              href="/"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              Home
             </Link>
+
+            {/* About Link */}
+            <Link
+              href="/#about"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              About
+            </Link>
+
+            {/* Services Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <button
+                className="flex cursor-pointer items-center gap-1 rounded-md border-none bg-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-blue"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                Services
+                <ChevronDown
+                  className={cn(
+                    "h-3.5 w-3.5 text-slate-500 transition-transform duration-300",
+                    dropdownOpen && "rotate-180"
+                  )}
+                />
+              </button>
+
+              {/* Dropdown Content */}
+              {dropdownOpen && (
+                <div className="absolute top-full left-1/2 z-50 -translate-x-1/2 pt-2">
+                  <div
+                    className="w-[580px] animate-in rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.12)] duration-200 fade-in-0 zoom-in-95"
+                    role="menu"
+                  >
+                    <div className="mb-4 border-b border-slate-100 pb-2">
+                      <span className="text-xs font-bold tracking-wider text-[#2563EB] uppercase">
+                        Our Data Solutions
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      {NAV_SOLUTIONS.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="group/item flex items-start gap-3.5 rounded-xl p-3 transition-all hover:bg-slate-50/80"
+                          role="menuitem"
+                        >
+                          <div className="flex-shrink-0 rounded-lg bg-blue-50 p-2 text-[#2563EB] transition-all group-hover/item:scale-105 group-hover/item:bg-blue-100">
+                            {item.icon ? ICON_MAP[item.icon] : null}
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-slate-900 transition-colors group-hover/item:text-[#2563EB]">
+                              {item.name}
+                            </h4>
+                            <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+                              {item.description}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Why Us Link */}
+            <Link
+              href="/#comparison"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              Why Us
+            </Link>
+
+            {/* Contact Link */}
+            <Link
+              href="/#contact"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Right Section: Desktop CTA & Mobile Toggle */}
+          <div className="flex items-center gap-4">
+            {/* Desktop CTA */}
+            <div className="hidden lg:block">
+              <Link href="/#contact">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="h-9 rounded-lg border-none bg-[#2563EB] px-5 text-xs font-bold text-white shadow-sm transition-colors duration-200 hover:bg-[#1D4ED8]"
+                >
+                  Get Quote
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <button
+                  className="cursor-pointer rounded-md p-1 text-slate-600 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-brand-blue/50 lg:hidden"
+                  aria-label="Open navigation menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-full max-w-sm overflow-y-auto bg-white p-0"
+              >
+                <SheetHeader className="border-b border-slate-100 px-6 pt-6 pb-4">
+                  <SheetTitle asChild>
+                    <Logo />
+                  </SheetTitle>
+                </SheetHeader>
+
+                <div className="flex flex-1 flex-col gap-6 px-6 py-6">
+                  {/* Solutions */}
+                  <div>
+                    <h3 className="mb-3 text-xs font-semibold tracking-wider text-brand-blue uppercase">
+                      Solutions
+                    </h3>
+                    <div className="flex flex-col gap-2">
+                      {NAV_SOLUTIONS.map((item) => (
+                        <SheetClose asChild key={item.name}>
+                          <Link
+                            href={item.href}
+                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                          >
+                            <span className="rounded bg-brand-blue/10 p-1 text-brand-blue">
+                              {item.icon ? ICON_MAP[item.icon] : null}
+                            </span>
+                            {item.name}
+                          </Link>
+                        </SheetClose>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Industries */}
+                  <div>
+                    <h3 className="mb-3 text-xs font-semibold tracking-wider text-brand-green uppercase">
+                      Industries
+                    </h3>
+                    <div className="grid grid-cols-2 gap-1">
+                      {NAV_INDUSTRIES.map((item) => (
+                        <SheetClose asChild key={item.name}>
+                          <Link
+                            href={item.href}
+                            className="rounded-lg px-2 py-1.5 text-sm font-medium text-[#0F172A] transition-colors hover:bg-slate-50 hover:text-[#10B981]"
+                          >
+                            {item.name}
+                          </Link>
+                        </SheetClose>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Resources & Links */}
+                  <div>
+                    <h3 className="mb-3 text-xs font-semibold tracking-wider text-slate-400 uppercase">
+                      Company &amp; Resources
+                    </h3>
+                    <div className="grid grid-cols-2 gap-1">
+                      {NAV_RESOURCES.map((item) => (
+                        <SheetClose asChild key={item.name}>
+                          <Link
+                            href={item.href}
+                            className="rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                          >
+                            {item.name}
+                          </Link>
+                        </SheetClose>
+                      ))}
+                      <SheetClose asChild>
+                        <Link
+                          href="/#about"
+                          className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                        >
+                          About
+                        </Link>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <Link
+                          href="/#contact"
+                          className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                        >
+                          Contact
+                        </Link>
+                      </SheetClose>
+                    </div>
+                  </div>
+                </div>
+
+                <SheetFooter className="border-t border-slate-100 px-6 pt-4 pb-8">
+                  <SheetClose asChild>
+                    <Link href="/#contact" className="w-full">
+                      <Button variant="primary" size="lg" className="w-full">
+                        Get Quote
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </SheetClose>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
-      )}
-    </nav>
+      </header>
+    </>
   )
 }

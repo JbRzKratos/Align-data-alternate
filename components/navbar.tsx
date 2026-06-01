@@ -22,9 +22,12 @@ import {
   SheetTrigger,
   SheetClose,
   SheetFooter,
+  SheetDescription,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { VisuallyHidden } from "radix-ui"
 import Logo from "@/components/ui/logo"
+import { usePathname } from "next/navigation"
 import {
   NAV_SOLUTIONS,
   NAV_INDUSTRIES,
@@ -44,6 +47,9 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -51,16 +57,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    setDropdownOpen(false)
+    setMobileMenuOpen(false)
+  }, [pathname])
+
   return (
     <>
-      {/* Skip to content — accessibility */}
-      <a
-        href="#main-content"
-        className="absolute -m-px h-px w-px overflow-hidden border-0 p-0 whitespace-nowrap focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:h-auto focus:w-auto focus:overflow-visible focus:rounded-lg focus:bg-brand-blue focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
-      >
-        Skip to main content
-      </a>
-
       {/* Floating Capsule Header */}
       <header
         role="banner"
@@ -193,7 +196,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <Sheet>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
                   className="cursor-pointer rounded-md p-1 text-slate-600 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-brand-blue/50 lg:hidden"
@@ -204,12 +207,16 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-full max-w-sm overflow-y-auto bg-white p-0"
+                className="w-full sm:max-w-full h-[100dvh] overflow-y-auto bg-white p-0"
               >
                 <SheetHeader className="border-b border-slate-100 px-6 pt-6 pb-4">
-                  <SheetTitle asChild>
-                    <Logo />
-                  </SheetTitle>
+                  <Logo />
+                  <VisuallyHidden.Root>
+                    <SheetTitle>Navigation Menu</SheetTitle>
+                    <SheetDescription>
+                      Mobile navigation menu for Aliign Data.
+                    </SheetDescription>
+                  </VisuallyHidden.Root>
                 </SheetHeader>
 
                 <div className="flex flex-1 flex-col gap-6 px-6 py-6">
@@ -220,17 +227,16 @@ export default function Navbar() {
                     </h3>
                     <div className="flex flex-col gap-2">
                       {NAV_SOLUTIONS.map((item) => (
-                        <SheetClose asChild key={item.name}>
-                          <Link
-                            href={item.href}
-                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
-                          >
-                            <span className="rounded bg-brand-blue/10 p-1 text-brand-blue">
-                              {item.icon ? ICON_MAP[item.icon] : null}
-                            </span>
-                            {item.name}
-                          </Link>
-                        </SheetClose>
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                        >
+                          <span className="rounded bg-brand-blue/10 p-1 text-brand-blue">
+                            {item.icon ? ICON_MAP[item.icon] : null}
+                          </span>
+                          {item.name}
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -242,14 +248,13 @@ export default function Navbar() {
                     </h3>
                     <div className="grid grid-cols-2 gap-1">
                       {NAV_INDUSTRIES.map((item) => (
-                        <SheetClose asChild key={item.name}>
-                          <Link
-                            href={item.href}
-                            className="rounded-lg px-2 py-1.5 text-sm font-medium text-[#0F172A] transition-colors hover:bg-slate-50 hover:text-[#10B981]"
-                          >
-                            {item.name}
-                          </Link>
-                        </SheetClose>
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="rounded-lg px-2 py-1.5 text-sm font-medium text-[#0F172A] transition-colors hover:bg-slate-50 hover:text-[#10B981]"
+                        >
+                          {item.name}
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -261,44 +266,37 @@ export default function Navbar() {
                     </h3>
                     <div className="grid grid-cols-2 gap-1">
                       {NAV_RESOURCES.map((item) => (
-                        <SheetClose asChild key={item.name}>
-                          <Link
-                            href={item.href}
-                            className="rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
-                          >
-                            {item.name}
-                          </Link>
-                        </SheetClose>
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                        >
+                          {item.name}
+                        </Link>
                       ))}
-                      <SheetClose asChild>
-                        <Link
-                          href="/#about"
-                          className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
-                        >
-                          About
-                        </Link>
-                      </SheetClose>
-                      <SheetClose asChild>
-                        <Link
-                          href="/#contact"
-                          className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
-                        >
-                          Contact
-                        </Link>
-                      </SheetClose>
+                      <Link
+                        href="/#about"
+                        className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                      >
+                        About
+                      </Link>
+                      <Link
+                        href="/#contact"
+                        className="col-span-2 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                      >
+                        Contact
+                      </Link>
                     </div>
                   </div>
                 </div>
 
                 <SheetFooter className="border-t border-slate-100 px-6 pt-4 pb-8">
-                  <SheetClose asChild>
-                    <Link href="/#contact" className="w-full">
-                      <Button variant="primary" size="lg" className="w-full">
-                        Get Quote
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </SheetClose>
+                  <Link href="/#contact" className="w-full">
+                    <Button variant="primary" size="lg" className="w-full">
+                      Get Quote
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </SheetFooter>
               </SheetContent>
             </Sheet>

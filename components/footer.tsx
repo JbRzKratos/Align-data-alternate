@@ -3,11 +3,8 @@ import Link from "next/link"
 import { Database, ShieldCheck } from "lucide-react"
 import Badge from "@/components/ui/badge"
 import Logo from "@/components/ui/logo"
-import NewsletterForm from "@/components/newsletter-form"
 import {
   FOOTER_SOLUTIONS,
-  FOOTER_INDUSTRIES,
-  FOOTER_RESOURCES,
   FOOTER_COMPLIANCE,
 } from "@/content/footer"
 
@@ -32,9 +29,9 @@ export default function Footer() {
       />
 
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="grid grid-cols-1 gap-12 border-b border-slate-200 pb-16 md:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 border-b border-slate-200 pb-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Logo and Brand Column */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:col-span-2">
             <div className="flex justify-start">
               <Logo />
             </div>
@@ -82,14 +79,6 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-
-            {/* Newsletter Subscription */}
-            <div className="mt-4 max-w-sm">
-              <h4 className="mb-2 text-xs font-bold tracking-wider text-slate-900 uppercase">
-                Subscribe to Revenue Intelligence
-              </h4>
-              <NewsletterForm />
-            </div>
           </div>
 
           {/* Solutions Column */}
@@ -103,44 +92,6 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-2.5" role="list">
               {FOOTER_SOLUTIONS.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-xs font-medium text-slate-500 transition-all hover:text-slate-900 hover:underline"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Industries Column */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-bold tracking-wider text-slate-900 uppercase">
-              Target Verticals
-            </h3>
-            <ul className="flex flex-col gap-2.5" role="list">
-              {FOOTER_INDUSTRIES.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-xs font-medium text-slate-500 transition-all hover:text-slate-900 hover:underline"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Column */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-bold tracking-wider text-slate-900 uppercase">
-              Resources
-            </h3>
-            <ul className="flex flex-col gap-2.5" role="list">
-              {FOOTER_RESOURCES.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}

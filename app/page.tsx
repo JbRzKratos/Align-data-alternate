@@ -164,7 +164,7 @@ export default function Page() {
           aria-labelledby="hero-heading"
         >
           <div
-            className="grid-bg pointer-events-none absolute inset-0 opacity-40"
+            className="grid-bg pointer-events-none absolute inset-0 opacity-100"
             aria-hidden="true"
           />
           <div
@@ -370,7 +370,7 @@ export default function Page() {
           aria-labelledby="universe-heading"
         >
           <div
-            className="bg-grid-bg pointer-events-none absolute inset-0 opacity-15"
+            className="grid-bg pointer-events-none absolute inset-0 opacity-50"
             aria-hidden="true"
           />
           <div className="mx-auto max-w-7xl px-6 md:px-8">
@@ -593,14 +593,14 @@ export default function Page() {
           className="border-t border-slate-200 bg-white py-20 md:py-28"
           aria-labelledby="faq-heading"
         >
-          <div className="mx-auto max-w-4xl px-6 md:px-8">
+          <div className="mx-auto max-w-6xl px-6 md:px-8">
             <SectionHeader
               badge="Clarifications"
               badgeVariant="blue"
               heading="Frequently Asked Questions"
               subheading="Everything you need to know about our B2B intelligence network, accuracy verification systems, and compliance frameworks."
               align="center"
-              className="mb-16"
+              className="mb-16 max-w-3xl mx-auto"
             />
             <h2 id="faq-heading" className="sr-only">
               Frequently Asked Questions

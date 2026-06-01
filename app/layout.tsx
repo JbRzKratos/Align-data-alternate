@@ -9,12 +9,14 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  preload: false,
 })
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
+  preload: false,
 })
 
 export const metadata: Metadata = {
@@ -86,6 +88,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={cn(
         "bg-background font-sans text-foreground antialiased",
         inter.variable,
@@ -93,13 +96,7 @@ export default function RootLayout({
       )}
     >
       <head>
-        {/* Google Fonts preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        {/* next/font automatically handles font self-hosting and preloading */}
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider>{children}</ThemeProvider>

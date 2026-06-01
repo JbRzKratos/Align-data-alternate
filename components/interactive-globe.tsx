@@ -362,7 +362,7 @@ export default function InteractiveGlobe() {
           database scale, precision ratings, and primary hub locations.
         </p>
 
-        <div className="flex flex-col gap-2.5">
+        <div className="flex snap-x snap-mandatory flex-row gap-3 overflow-x-auto pb-4 md:flex-col md:gap-2.5 md:overflow-visible md:pb-0">
           {regions.map((reg) => {
             const isSelected = reg.name === selectedRegion
             return (
@@ -370,7 +370,7 @@ export default function InteractiveGlobe() {
                 key={reg.name}
                 onClick={() => setSelectedRegion(reg.name)}
                 className={cn(
-                  "flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 text-left transition-all duration-350",
+                  "flex w-[240px] shrink-0 snap-start cursor-pointer items-center justify-between rounded-xl border p-3.5 text-left transition-all duration-350 md:w-full",
                   isSelected
                     ? "border-blue-200 bg-white shadow-[0_4px_20px_rgba(37,99,235,0.05)]"
                     : "hover:border-slate-355 border-slate-200/60 bg-slate-50 hover:bg-slate-100/70"
@@ -409,11 +409,11 @@ export default function InteractiveGlobe() {
       </div>
 
       {/* Right Column: Globe Canvas */}
-      <div className="relative flex h-[360px] w-full items-center justify-center md:h-[450px] lg:col-span-7">
+      <div className="relative flex h-[320px] w-full items-center justify-center md:h-[450px] lg:col-span-7">
         {/* Detail Float Box */}
         <Card
           hoverable={false}
-          className="absolute top-4 right-4 z-10 flex max-w-xs flex-col gap-2 border border-slate-200/80 bg-white/95 p-4 text-xs shadow-md backdrop-blur-sm"
+          className="absolute right-0 top-0 z-10 flex max-w-[220px] flex-col gap-1.5 border border-slate-200/80 bg-white/95 p-3 text-[10px] shadow-md backdrop-blur-sm md:right-4 md:top-4 md:max-w-xs md:gap-2 md:p-4 md:text-xs"
         >
           <div className="flex justify-start">
             <Badge

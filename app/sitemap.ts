@@ -3,6 +3,8 @@ import { ALL_SOLUTIONS } from "@/content/solutions"
 
 const BASE_URL = "https://www.aliigndata.com"
 
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const solutionRoutes: MetadataRoute.Sitemap = ALL_SOLUTIONS.map(
     (solution) => ({

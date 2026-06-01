@@ -19,32 +19,47 @@ interface FAQSectionProps {
   className?: string
 }
 
-/**
- * Reusable FAQ section using shadcn Accordion.
- * Replaces all <details>/<summary> FAQ implementations.
- * Fully keyboard navigable and accessible (ARIA compliant).
- */
 export default function FAQSection({ faqs, className }: FAQSectionProps) {
-  return (
-    <Accordion
-      type="single"
-      collapsible
-      className={cn("flex flex-col gap-2", className)}
+  const mid = Math.ceil(faqs.length / 2)
+  const leftFaqs = faqs.slice(0, mid)
+  const rightFaqs = faqs.slice(mid)
+
+  const renderFaqItem = (faq: FAQItem, index: number, total: number) => (
+    <AccordionItem
+      key={faq.q}
+      value={faq.q}
+      className={cn(
+        "bg-transparent px-4 md:rounded-2xl md:border md:border-slate-200/80 md:bg-white md:px-6 md:py-1 md:shadow-[0_4px_20px_rgb(0,0,0,0.03)] md:transition-all md:hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] md:hover:border-blue-100",
+        index === total - 1 ? "border-b-0 md:border" : "border-b border-slate-200/60 md:border"
+      )}
     >
-      {faqs.map((faq, index) => (
-        <AccordionItem
-          key={index}
-          value={`faq-${index}`}
-          className="rounded-xl border border-slate-200 bg-slate-50 px-5 py-1 transition-colors hover:bg-slate-100/30"
-        >
-          <AccordionTrigger className="py-4 text-sm font-bold text-slate-800 hover:no-underline [&>svg]:text-brand-blue">
-            {faq.q}
-          </AccordionTrigger>
-          <AccordionContent className="border-t border-slate-200 pt-3 pb-4 text-xs leading-relaxed text-slate-600">
-            {faq.a}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+      <AccordionTrigger className="py-4 text-left text-[13px] font-bold leading-snug text-slate-800 hover:no-underline hover:text-brand-blue md:py-5 md:text-sm [&>svg]:text-brand-blue">
+        {faq.q}
+      </AccordionTrigger>
+      <AccordionContent className="border-t border-slate-100 pt-3 pb-5 text-xs leading-relaxed text-slate-500 md:text-sm md:leading-relaxed">
+        {faq.a}
+      </AccordionContent>
+    </AccordionItem>
+  )
+
+  return (
+    <div className={cn("w-full", className)}>
+      {/* Mobile View: Single Compact Card container */}
+      <div className="md:hidden overflow-hidden rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-xl shadow-slate-200/40">
+        <Accordion type="single" collapsible className="flex flex-col">
+          {faqs.map((faq, index) => renderFaqItem(faq, index, faqs.length))}
+        </Accordion>
+      </div>
+
+      {/* Desktop View: 2-Column Grid */}
+      <div className="hidden md:grid md:grid-cols-2 md:items-start md:gap-6 lg:gap-8">
+        <Accordion type="single" collapsible className="flex flex-col gap-4">
+          {leftFaqs.map((faq, index) => renderFaqItem(faq, index, leftFaqs.length))}
+        </Accordion>
+        <Accordion type="single" collapsible className="flex flex-col gap-4">
+          {rightFaqs.map((faq, index) => renderFaqItem(faq, index, rightFaqs.length))}
+        </Accordion>
+      </div>
+    </div>
   )
 }

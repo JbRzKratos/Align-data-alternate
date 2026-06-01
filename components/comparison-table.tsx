@@ -73,8 +73,8 @@ export default function ComparisonTable() {
       {/* Decorative side accent blur */}
       <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-[#2563EB] to-[#10B981]" />
 
-      <table className="w-full min-w-[800px] border-collapse text-left">
-        <thead>
+      <table className="block w-full text-left md:table md:min-w-[800px] md:border-collapse">
+        <thead className="hidden md:table-header-group">
           <tr className="border-b border-slate-200/60 bg-slate-50">
             <th className="w-1/3 p-5 text-xs font-bold tracking-widest text-slate-500 uppercase">
               Performance Indicators
@@ -96,36 +96,42 @@ export default function ComparisonTable() {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-200/60">
+        <tbody className="block divide-y divide-slate-200/60 md:table-row-group">
           {data.map((row, index) => (
-            <tr key={index} className="transition-colors hover:bg-slate-50/40">
+            <tr key={index} className="block p-5 transition-colors hover:bg-slate-50/40 md:table-row md:p-0">
               {/* Feature info */}
-              <td className="p-5">
+              <td className="mb-4 block md:mb-0 md:table-cell md:p-5">
                 <h4 className="mb-0.5 text-sm font-bold text-slate-900">
                   {row.feature}
                 </h4>
-                <p className="max-w-sm text-xs leading-normal text-slate-500">
+                <p className="text-xs leading-normal text-slate-500 md:max-w-sm">
                   {row.description}
                 </p>
               </td>
 
               {/* Aliign Data value */}
-              <td className="relative p-5">
+              <td className="relative mb-3 block md:mb-0 md:table-cell md:p-5">
                 {/* Visual accent backdrop to draw focus to the primary column */}
-                <div className="pointer-events-none absolute -inset-y-2 right-0 left-0 border-x border-blue-100/25 bg-blue-50/20" />
+                <div className="pointer-events-none absolute -inset-y-2 right-0 left-0 hidden border-x border-blue-100/25 bg-blue-50/20 md:block" />
 
+                <div className="mb-1 text-[10px] font-bold tracking-wider text-[#10B981] uppercase md:hidden">
+                  AliignData
+                </div>
                 <div className="relative z-10 flex items-start gap-2.5">
                   <div className="mt-0.5 flex-shrink-0 rounded border border-emerald-100/80 bg-emerald-50 p-1 text-emerald-600 shadow-sm">
                     <Check className="h-3.5 w-3.5 stroke-[3]" />
                   </div>
-                  <span className="text-sm leading-relaxed font-semibold text-slate-800">
+                  <span className="text-sm font-semibold leading-relaxed text-slate-800">
                     {row.aliignVal}
                   </span>
                 </div>
               </td>
 
               {/* Competitors value */}
-              <td className="p-5">
+              <td className="block md:table-cell md:p-5">
+                <div className="mb-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase md:hidden">
+                  Traditional Vendors
+                </div>
                 <div className="flex items-start gap-2.5">
                   {row.competitorPass ? (
                     <div className="mt-0.5 flex-shrink-0 rounded border border-slate-200 bg-slate-100 p-1 text-slate-500">

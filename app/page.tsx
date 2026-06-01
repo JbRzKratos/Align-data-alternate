@@ -21,6 +21,15 @@ import {
   Building2,
   Wrench,
   Truck,
+  CheckCircle,
+  Check,
+  Mail,
+  Filter,
+  UserCheck,
+  LineChart,
+  Award,
+  Clock,
+  Zap,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Badge from "@/components/ui/badge"
@@ -244,27 +253,45 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right: Dashboard Mockup Illustration */}
-            <div
-              className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] p-2 shadow-sm md:h-[450px] lg:col-span-6"
-              aria-hidden="true"
-            >
-              <div className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-full border border-slate-200/65 bg-white/85 px-3 py-1 font-mono text-[10px] text-[#2563EB] shadow-sm backdrop-blur-md">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
-                REVENUE INTELLIGENCE STREAMING
+            {/* Right: Dashboard Mockup & Stats Row */}
+            <div className="flex flex-col gap-6 lg:col-span-6">
+              <div
+                className="relative h-[300px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] p-2 shadow-sm md:h-[400px]"
+                aria-hidden="true"
+              >
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-full border border-slate-200/65 bg-white/85 px-3 py-1 font-mono text-[10px] text-[#2563EB] shadow-sm backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
+                  REVENUE INTELLIGENCE STREAMING
+                </div>
+                <div className="absolute right-4 bottom-4 z-10 font-mono text-[10px] text-slate-400">
+                  75M+ NODES // 95% VERIFIED
+                </div>
+                <div className="relative h-full w-full overflow-hidden rounded-xl">
+                  <Image
+                    src="/hero_dashboard.png"
+                    alt="Revenue Intelligence Dashboard Mockup"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
               </div>
-              <div className="absolute right-4 bottom-4 z-10 font-mono text-[10px] text-slate-400">
-                75M+ NODES // 95% VERIFIED
-              </div>
-              <div className="relative h-full w-full overflow-hidden rounded-xl">
-                <Image
-                  src="/hero_dashboard.png"
-                  alt="Revenue Intelligence Dashboard Mockup"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+
+              {/* Mockup Stats Row */}
+              <div className="grid grid-cols-3 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center shadow-xs">
+                <div>
+                  <p className="font-heading text-lg font-extrabold text-[#2563EB] md:text-xl">210%</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Average Growth</p>
+                </div>
+                <div className="border-x border-slate-200">
+                  <p className="font-heading text-lg font-extrabold text-slate-900 md:text-xl">75M+</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Verified Leads</p>
+                </div>
+                <div>
+                  <p className="font-heading text-lg font-extrabold text-[#10B981] md:text-xl">95%</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Accuracy Rate</p>
+                </div>
               </div>
             </div>
           </div>
@@ -299,87 +326,374 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ─── SECTION 3: DATA INTELLIGENCE ENGINE ────────────────────────── */}
+        {/* ─── SECTION 3: OUTREACH PLATFORM FEATURES ──────────────────────── */}
         <section
-          id="about"
-          className="relative bg-white py-20 md:py-28"
-          aria-labelledby="engine-heading"
+          id="features"
+          className="border-t border-slate-200/80 bg-white py-20 md:py-28"
+          aria-labelledby="features-heading"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <SectionHeader
-              badge="Our Verification Pipeline"
+              badge="Platform Features"
               badgeVariant="blue"
-              heading="How Aliign Data Powers Revenue Growth"
-              subheading="Discover active pipeline channels through our triple-vetted intelligence gathering process."
+              heading="Everything you need to scale your outreach"
+              subheading="Access the most comprehensive B2B databases with tools built for modern marketers and sales teams."
               align="center"
               className="mx-auto mb-16 max-w-2xl"
             />
-            <h2 id="engine-heading" className="sr-only">
-              How Aliign Data Powers Revenue Growth
+            <h2 id="features-heading" className="sr-only">
+              Everything you need to scale your outreach
             </h2>
 
-            <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "75M+ Business Contacts",
+                  description: "Connect with verified decision-makers across technology, finance, healthcare, and retail sectors.",
+                  badge: "95% accuracy",
+                  icon: <Users className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+                {
+                  title: "Email Appending",
+                  description: "Enrich your outdated lists with verified direct dials, corporate email addresses, and corporate profiles.",
+                  badge: "24hr turnaround",
+                  icon: <Mail className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+                {
+                  title: "GDPR Compliant Data",
+                  description: "Full compliance under legitimate interest models, safeguarding your email deliverability and legal security.",
+                  badge: "100% compliant",
+                  icon: <Shield className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+                {
+                  title: "Advanced Segmentation",
+                  description: "Filter prospects based on company size, revenue, location, job hierarchy, and active tech stacks.",
+                  badge: "70+ filters",
+                  icon: <Filter className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+                {
+                  title: "Dedicated Account Team",
+                  description: "Receive priority support and custom data compiling from research specialists whenever you need lists.",
+                  badge: "24/7 available",
+                  icon: <UserCheck className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+                {
+                  title: "Real-Time Data Updates",
+                  description: "Never worry about domain decay. We refresh and phone-validate contact records every 30 days.",
+                  badge: "30-day refresh",
+                  icon: <LineChart className="h-5 w-5 text-[#2563EB]" />,
+                  variant: "blue",
+                },
+              ].map((feat) => (
+                <Card key={feat.title} variant="blue" className="group/feat flex flex-col justify-between hover:border-blue-300">
+                  <CardHeader className="flex flex-col gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-brand-blue transition-colors group-hover/feat:bg-blue-100">
+                      {feat.icon}
+                    </div>
+                    <div>
+                      <CardTitle className="text-base font-bold text-slate-900 group-hover/feat:text-[#2563EB]">{feat.title}</CardTitle>
+                      <CardDescription className="mt-2 text-xs leading-relaxed text-slate-500">{feat.description}</CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="mt-4 border-t border-slate-100 pt-3">
+                    <Badge variant="blue" className="text-[10px] font-bold uppercase">{feat.badge}</Badge>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 4: KEY METRICS ROW ─────────────────────────────────── */}
+        <section
+          className="border-y border-slate-200/80 bg-slate-50/50 py-12"
+          aria-label="Global stats scale"
+        >
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4 md:divide-x md:divide-slate-200">
+              {[
+                { value: "75M+", label: "Verified Contacts" },
+                { value: "95%", label: "Data Accuracy" },
+                { value: "500+", label: "Enterprise Clients" },
+                { value: "150+", label: "Countries Covered" },
+              ].map((metric) => (
+                <div key={metric.label} className="flex flex-col items-center justify-center">
+                  <p className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+                    {metric.value}
+                  </p>
+                  <p className="mt-1.5 font-mono text-[10px] tracking-wider text-slate-400 uppercase">
+                    {metric.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 5: 3-STEP PROCESS SECTION ──────────────────────────── */}
+        <section
+          id="process"
+          className="relative bg-white py-20 md:py-28"
+          aria-labelledby="process-heading"
+        >
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <SectionHeader
+              badge="Simple Process"
+              badgeVariant="green"
+              heading="From request to results in 48 hours"
+              subheading="Our streamlined 3-step process ensures you get accurate, actionable data fast—without the complexity."
+              align="center"
+              className="mx-auto mb-20 max-w-2xl"
+            />
+            <h2 id="process-heading" className="sr-only">
+              From request to results in 48 hours
+            </h2>
+
+            <div className="flex flex-col gap-24 md:gap-32">
               {/* Step 1 */}
-              <Card variant="blue" className="group/card">
-                <CardHeader className="relative">
-                  <div
-                    className="absolute top-4 right-4 font-mono text-xs font-bold text-gray-600 group-hover/card:text-brand-blue"
-                    aria-hidden="true"
-                  >
-                    STEP 01
+              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+                {/* Left: Image */}
+                <div className="relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:col-span-6">
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#2563EB] shadow-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
+                    TARGET DEFINITION
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-blue/15 text-brand-blue">
-                    <Search className="h-5 w-5" aria-hidden="true" />
+                  <div className="relative h-full w-full overflow-hidden rounded-xl">
+                    <Image
+                      src="/step1_needs.png"
+                      alt="Step 1 — Tell us what you need"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
                   </div>
-                  <CardTitle className="mt-2">Discover</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  Our crawler models map organizational technographics, buying
-                  signals, and corporate layouts to locate decision makers
-                  matching your ICP.
-                </CardContent>
-              </Card>
+                </div>
+                {/* Right: Copy */}
+                <div className="flex flex-col gap-6 text-left lg:col-span-6 lg:pl-6">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 font-mono text-xs font-bold text-[#2563EB]">1</span>
+                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#2563EB] uppercase">STEP 01</span>
+                  </div>
+                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+                    Tell us what you need
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500">
+                    Share your target criteria — industry, job titles, company size, location, and any specific requirements. Our platform aligns leads directly with your criteria.
+                  </p>
+                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {[
+                      "Industry & vertical targeting",
+                      "Job title & seniority filters",
+                      "Company size & revenue range",
+                      "Geographic location",
+                    ].map((bullet) => (
+                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle className="h-4 w-4 text-[#2563EB]" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-2">
+                    <a href="#contact">
+                      <Button variant="primary" size="default">
+                        Get Started Now
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+              </div>
 
               {/* Step 2 */}
-              <Card variant="green" className="group/card">
-                <CardHeader className="relative">
-                  <div
-                    className="absolute top-4 right-4 font-mono text-xs font-bold text-gray-600 group-hover/card:text-brand-green"
-                    aria-hidden="true"
-                  >
-                    STEP 02
+              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+                {/* Left: Copy */}
+                <div className="order-2 flex flex-col gap-6 text-left lg:order-1 lg:col-span-6 lg:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 font-mono text-xs font-bold text-[#10B981]">2</span>
+                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#10B981] uppercase">STEP 02</span>
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-green/15 text-brand-green">
-                    <RefreshCw className="h-5 w-5" aria-hidden="true" />
+                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+                    We verify every contact
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500">
+                    Our research team and algorithmic engine hand-verify each contact using multiple data sources, dial tests, and strict SMTP validation protocols.
+                  </p>
+                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {[
+                      "Manual verification by experts",
+                      "Cross-reference multiple sources",
+                      "Email & phone validation",
+                      "Duplicate removal & cleanup",
+                    ].map((bullet) => (
+                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle className="h-4 w-4 text-[#10B981]" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Right: Image */}
+                <div className="order-1 relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:order-2 lg:col-span-6">
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#10B981] shadow-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+                    VERIFICATION PROCESS
                   </div>
-                  <CardTitle className="mt-2">Verify</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  Records go through SMTP server verification and direct phone
-                  testing. Human researchers scrub bad inboxes every 30 days.
-                </CardContent>
-              </Card>
+                  <div className="relative h-full w-full overflow-hidden rounded-xl">
+                    <Image
+                      src="/step2_verification.png"
+                      alt="Step 2 — We verify every contact"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
+              </div>
 
               {/* Step 3 */}
-              <Card variant="blue" className="group/card">
-                <CardHeader className="relative">
-                  <div
-                    className="absolute top-4 right-4 font-mono text-xs font-bold text-gray-600 group-hover/card:text-brand-blue"
-                    aria-hidden="true"
-                  >
-                    STEP 03
+              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+                {/* Left: Image */}
+                <div className="relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:col-span-6">
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#2563EB] shadow-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
+                    DATA FULFILLMENT
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-blue/15 text-brand-blue">
-                    <Users className="h-5 w-5" aria-hidden="true" />
+                  <div className="relative h-full w-full overflow-hidden rounded-xl">
+                    <Image
+                      src="/step3_delivery.png"
+                      alt="Step 3 — Receive your data"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
                   </div>
-                  <CardTitle className="mt-2">Activate</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  Clean contact databases push straight to Salesforce, HubSpot,
-                  or custom CSV folders. Launch target campaigns without
-                  bouncing.
-                </CardContent>
-              </Card>
+                </div>
+                {/* Right: Copy */}
+                <div className="flex flex-col gap-6 text-left lg:col-span-6 lg:pl-6">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 font-mono text-xs font-bold text-[#2563EB]">3</span>
+                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#2563EB] uppercase">STEP 03</span>
+                  </div>
+                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+                    Receive your data
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500">
+                    Get your custom-built contact list delivered safely in your preferred format. Connect directly to export leads into your connected CRM workspace.
+                  </p>
+                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {[
+                      "Multiple export formats",
+                      "Direct CRM integration",
+                      "Detailed contact profiles",
+                      "Ready to use immediately",
+                    ].map((bullet) => (
+                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle className="h-4 w-4 text-[#2563EB]" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 6: WHY CHOOSE ALIGNDATA ────────────────────────────── */}
+        <section
+          id="why-choose"
+          className="border-t border-slate-200/80 bg-slate-50/50 py-20 md:py-28"
+          aria-labelledby="why-heading"
+        >
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <div className="flex flex-col justify-between gap-8 border-b border-slate-200 pb-12 lg:flex-row lg:items-end">
+              <div className="max-w-2xl text-left">
+                <div className="flex justify-start">
+                  <Badge variant="blue" className="mb-4">Our Advantages</Badge>
+                </div>
+                <h2 id="why-heading" className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+                  Why Choose Aligndata
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                  Real researchers verify every contact. Higher deliverability, better response rates, and measurable ROI.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-6 md:gap-12">
+                <div>
+                  <p className="font-heading text-2xl font-extrabold text-[#2563EB] md:text-3xl">210%</p>
+                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Avg ROI</p>
+                </div>
+                <div className="border-l border-slate-200 pl-6 md:pl-12">
+                  <p className="font-heading text-2xl font-extrabold text-slate-900 md:text-3xl">98%</p>
+                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Deliverability</p>
+                </div>
+                <div className="border-l border-slate-200 pl-6 md:pl-12">
+                  <p className="font-heading text-2xl font-extrabold text-[#10B981] md:text-3xl">4.9/5</p>
+                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Rating</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "Hand-Verified Accuracy",
+                  description: "Unlike static lists, our active contact database is phone-vetted by real researchers, securing 95% validity.",
+                  badge: "95% verified",
+                  icon: <Award className="h-5 w-5 text-[#2563EB]" />,
+                },
+                {
+                  title: "Always Fresh",
+                  description: "We update, clean, and ping inboxes on a continuous cycle, running a full refresh every 30 days.",
+                  badge: "30-day refresh",
+                  icon: <RefreshCw className="h-5 w-5 text-[#2563EB]" />,
+                },
+                {
+                  title: "Dedicated Support",
+                  description: "Receive direct, customized compiler support and target ICP reviews from dedicated data specialists.",
+                  badge: "24/7 available",
+                  icon: <UserCheck className="h-5 w-5 text-[#2563EB]" />,
+                },
+                {
+                  title: "48-Hour Delivery",
+                  description: "No endless queues. Get your custom verified email lists compiled and pushed directly in less than 48 hours.",
+                  badge: "24hr turnaround",
+                  icon: <Clock className="h-5 w-5 text-[#2563EB]" />,
+                },
+                {
+                  title: "GDPR Compliant",
+                  description: "Rest easy knowing your prospecting practices align perfectly with international compliance laws (GDPR, CCPA).",
+                  badge: "100% compliant",
+                  icon: <Shield className="h-5 w-5 text-[#2563EB]" />,
+                },
+                {
+                  title: "Free Monthly Updates",
+                  description: "We automatically scan and push missing target contacts and job updates for the life of your campaign.",
+                  badge: "Free updates",
+                  icon: <Zap className="h-5 w-5 text-[#2563EB]" />,
+                },
+              ].map((item) => (
+                <Card key={item.title} variant="default" className="group/why flex flex-col justify-between border-slate-200/60 p-6 hover:border-blue-300">
+                  <CardHeader className="flex flex-col gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#2563EB] transition-colors group-hover/why:bg-blue-100">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <CardTitle className="text-base font-bold text-slate-900 group-hover/why:text-[#2563EB]">{item.title}</CardTitle>
+                      <CardDescription className="mt-2 text-xs leading-relaxed text-slate-500">{item.description}</CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="mt-4 border-t border-slate-100 pt-3">
+                    <Badge variant="blue" className="text-[10px] font-bold uppercase">{item.badge}</Badge>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -607,7 +921,57 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ─── SECTION 11: FAQ ─────────────────────────────────────────────── */}
+        {/* ─── SECTION 11: GET A CUSTOM QUOTE CALLOUT ────────────────────── */}
+        <section
+          className="border-t border-slate-200 bg-white py-20"
+          aria-labelledby="quote-heading"
+        >
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-gradient-to-br from-slate-50/80 to-blue-50/40 p-8 text-center shadow-xs md:p-12">
+              {/* Mesh blur */}
+              <div className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 rounded-full bg-blue-100/50 blur-[60px]" />
+              <div className="pointer-events-none absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-emerald-100/30 blur-[60px]" />
+
+              <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6">
+                <h3 id="quote-heading" className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+                  Get a custom quote tailored to your needs
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-500">
+                  Connect with our team to discuss your data requirements. We'll provide a detailed quote and show you the exact data completeness and quality you can expect within 24–48 hours.
+                </p>
+
+                <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
+                  <a href="#contact">
+                    <Button variant="primary" size="default">
+                      Get Quote
+                    </Button>
+                  </a>
+                  <a href="#contact">
+                    <Button variant="secondary" size="default">
+                      Talk to the Team
+                    </Button>
+                  </a>
+                </div>
+
+                <div className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 text-[10px] font-bold text-slate-600 sm:grid-cols-4">
+                  {[
+                    "95% accuracy guarantee",
+                    "24–48h delivery",
+                    "GDPR/CCPA/CASL compliant",
+                    "Custom targeting options",
+                  ].map((check) => (
+                    <div key={check} className="flex items-center justify-center gap-1.5">
+                      <Check className="h-3.5 w-3.5 text-[#10B981]" />
+                      <span className="uppercase tracking-wider">{check}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 12: FAQ ─────────────────────────────────────────────── */}
         <section
           id="faq"
           className="border-t border-slate-200 bg-white py-20 md:py-28"

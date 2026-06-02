@@ -19,10 +19,9 @@ export function Card({
         hoverable && [
           "hover:scale-[1.015] hover:shadow-md",
           variant === "blue" &&
-            "hover:border-blue-300 hover:shadow-[0_8px_30px_rgb(37,99,235,0.06)]",
+            "hover:shadow-[0_8px_30px_rgb(37,99,235,0.06)]",
           variant === "green" &&
-            "hover:border-emerald-300 hover:shadow-[0_8px_30px_rgb(16,185,129,0.06)]",
-          variant === "default" && "hover:border-slate-300",
+            "hover:shadow-[0_8px_30px_rgb(16,185,129,0.06)]",
         ],
         className
       )}

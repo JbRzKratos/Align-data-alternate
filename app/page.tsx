@@ -7,18 +7,7 @@ import {
   Database,
   Shield,
   Cpu,
-  Landmark,
   Hammer,
-  GraduationCap,
-  ShoppingBag,
-  MapPin,
-  Sparkles,
-  ArrowRight,
-  Lock,
-  RefreshCw,
-  Search,
-  Users,
-  Building2,
   Wrench,
   Truck,
   CheckCircle,
@@ -30,6 +19,16 @@ import {
   Award,
   Clock,
   Zap,
+  Building2,
+  Users,
+  MapPin,
+  Sparkles,
+  ArrowRight,
+  Factory,
+  ChevronRight,
+  Phone,
+  Layers,
+  Share2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Badge from "@/components/ui/badge"
@@ -43,112 +42,288 @@ import {
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import UniverseMap from "@/components/universe-map"
-import ComparisonTable from "@/components/comparison-table"
 import InteractiveGlobe from "@/components/interactive-globe"
 import SectionHeader from "@/components/sections/SectionHeader"
 import FAQSection from "@/components/sections/FAQSection"
+import LeadForm from "@/components/lead-form"
 import CTASection from "@/components/sections/CTASection"
-import SolutionCard from "@/components/cards/SolutionCard"
-import IndustryCard from "@/components/cards/IndustryCard"
-import TestimonialCard from "@/components/cards/TestimonialCard"
-
-// Content imports — all data centralized in /content
-import { HOMEPAGE_FAQS } from "@/content/faqs"
-import { HERO_STATS } from "@/content/stats"
-import { INDUSTRIES } from "@/content/industries"
-import { TESTIMONIALS } from "@/content/testimonials"
-import { COMPLIANCE_ITEMS } from "@/content/compliance"
-import { ALL_SOLUTIONS } from "@/content/solutions"
-
-// Lucide icon map for industry cards
-const INDUSTRY_ICON_MAP: Record<string, React.ReactNode> = {
-  Shield: <Shield className="h-5 w-5" />,
-  Cpu: <Cpu className="h-5 w-5" />,
-  Landmark: <Landmark className="h-5 w-5" />,
-  Hammer: <Hammer className="h-5 w-5" />,
-  GraduationCap: <GraduationCap className="h-5 w-5" />,
-  ShoppingBag: <ShoppingBag className="h-5 w-5" />,
-  Wrench: <Wrench className="h-5 w-5" />,
-  Truck: <Truck className="h-5 w-5" />,
-}
-
-// Lucide icon map for solution cards
-const SOLUTION_ICON_MAP: Record<string, React.ReactNode> = {
-  "technology-users-database": <Cpu className="h-5 w-5" />,
-  "healthcare-database": <Shield className="h-5 w-5" />,
-  "professional-email-lists": <Database className="h-5 w-5" />,
-  "industry-databases": <Building2 className="h-5 w-5" />,
-  "data-appending": <Sparkles className="h-5 w-5" />,
-  "regional-databases": <MapPin className="h-5 w-5" />,
-}
 
 export const metadata: Metadata = {
-  title: "The Global Business Intelligence Network",
+  title: "Manufacturing Industry Email List 2026 | Verified B2B Contacts",
   description:
-    "Turn business data into revenue intelligence. Access verified decision-makers, technology stacks, and healthcare professionals with 95% accuracy. GDPR & CCPA compliant.",
+    "Get direct access to 8M+ verified decision makers, C-level executives, plant managers, and procurement leaders across 150K+ manufacturing companies. 95% email accuracy guaranteed. GDPR & CCPA compliant.",
   keywords:
-    "B2B Data Provider, Business Contact Database, Verified Email Lists, Technology Users Database, Healthcare Email Lists, Industry Database, Business Intelligence Data, Data Appending Services, Decision Maker Contacts, Global Business Database",
+    "manufacturing email list, b2b manufacturing database, plant managers email list, automotive manufacturing contacts, aerospace and defense b2b leads, procurement directors email list, verified b2b emails 2026",
   alternates: {
     canonical: "https://www.aliigndata.com",
   },
   openGraph: {
-    title: "Aliign Data | The Global Business Intelligence Network",
+    title: "Manufacturing Industry Email List 2026 | Verified B2B Contacts",
     description:
-      "Turn business data into revenue intelligence. Access verified decision-makers, technology stacks, and healthcare professionals with 95% accuracy.",
+      "Reach C-level executives, plant managers, and procurement heads with our verified Manufacturing Email Database of 8M+ contacts. 95% accuracy guaranteed.",
     url: "https://www.aliigndata.com",
     images: [
       {
         url: "https://www.aliigndata.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Aliign Data — The Global Business Intelligence Network",
+        alt: "Aliign Data — Manufacturing Industry Email List 2026",
       },
     ],
   },
 }
 
-// Schema.org JSON-LD data — statically generated (no inline functions in JSX)
+// Schema.org JSON-LD data for SEO & Generative Engine Optimization (GEO)
 const ORG_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Aliign Data",
+  name: "Aligndata",
   url: "https://www.aliigndata.com",
   logo: "https://www.aliigndata.com/logo.png",
   description:
-    "The global business intelligence network providing verified B2B contact lists and data enrichment services.",
+    "Provider of highly verified B2B manufacturing industry email lists and revenue intelligence databases.",
   sameAs: [
     "https://www.linkedin.com/company/aliigndata",
-    "https://twitter.com/aliigndata",
   ],
 }
+
+const MANUFACTURING_FAQS = [
+  {
+    q: "What job titles are included in the manufacturing email list?",
+    a: "Our database contains direct contact details for Plant Managers, Procurement Managers, Operations Directors, VP Manufacturing, Supply Chain Managers, Engineering Heads, and C-Level Executives.",
+  },
+  {
+    q: "Is the data customizable?",
+    a: "Yes. You can customize your list using over 50 filter criteria including industry sub-sector, company size, revenue, geographic location, job title, and specific production capabilities.",
+  },
+  {
+    q: "How accurate is the data?",
+    a: "We maintain a strict 95% accuracy guarantee. All email addresses and direct dials undergo double verification (machine validation + human dial tests) before delivery.",
+  },
+  {
+    q: "Can I get a sample?",
+    a: "Absolutely. We offer a free, custom-tailored sample based on your specific target market criteria. Request your sample via our quote form.",
+  },
+]
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: HOMEPAGE_FAQS.map((f) => ({
+  mainEntity: MANUFACTURING_FAQS.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
 }
 
-const WEBSITE_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Aliign Data",
-  url: "https://www.aliigndata.com",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://www.aliigndata.com/?s={search_term_string}",
-    "query-input": "required name=search_term_string",
+// Custom Manufacturing Copy constants
+const INDUSTRIES_COVERED = [
+  {
+    name: "Heavy Manufacturing",
+    count: "2.1M+ contacts",
+    icon: <Hammer className="h-5 w-5 text-[#2563EB]" />,
+    sectors: [
+      "Automotive Manufacturing",
+      "Aerospace & Defense",
+      "Machinery & Equipment",
+      "Metal Fabrication",
+      "Chemical Manufacturing",
+    ],
+    bg: "bg-blue-50/50",
   },
-}
+  {
+    name: "Consumer Goods & FMCG",
+    count: "3.5M+ contacts",
+    icon: <Truck className="h-5 w-5 text-[#10B981]" />,
+    sectors: [
+      "Food & Beverage Production",
+      "Textiles & Apparel",
+      "Household Appliances",
+      "Furniture Manufacturing",
+      "Electronics Assembly",
+    ],
+    bg: "bg-emerald-50/30",
+  },
+  {
+    name: "High-Tech Manufacturing",
+    count: "1.2M+ contacts",
+    icon: <Cpu className="h-5 w-5 text-[#2563EB]" />,
+    sectors: [
+      "Semiconductor Manufacturing",
+      "Medical Device Manufacturing",
+      "Robotics & Automation",
+      "3D Printing & Additive Manufacturing",
+    ],
+    bg: "bg-blue-50/50",
+  },
+  {
+    name: "Industrial Services",
+    count: "1.8M+ contacts",
+    icon: <Wrench className="h-5 w-5 text-[#10B981]" />,
+    sectors: [
+      "Packaging & Labeling",
+      "Plant Engineering & Maintenance",
+      "Quality Control & Testing",
+      "Industrial Design Services",
+    ],
+    bg: "bg-emerald-50/30",
+  },
+]
+
+const RECORD_FIELDS = [
+  {
+    field: "Verified Business Email Address",
+    desc: "100% SMTP verified corporate emails with active inbox validation.",
+    icon: <Mail className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Full Name & Accurate Job Title",
+    desc: "Vetted seniority classification matching official organizational charts.",
+    icon: <UserCheck className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Company Name & Industry Classification",
+    desc: "Standard SIC and NAICS code categorization for clean database sorting.",
+    icon: <Building2 className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Direct Phone Number",
+    desc: "Direct desk lines and corporate mobile extensions (where available).",
+    icon: <Phone className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Company Location Details",
+    desc: "Complete business addresses covering City, State, Country, and ZIP codes.",
+    icon: <MapPin className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Company Size & Revenue Range",
+    desc: "Employee bandwidth and annual corporate revenue ranges for target scaling.",
+    icon: <LineChart className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "Production Capabilities & Facility Type",
+    desc: "Insightful markers on facility setups, floor sizing, and equipment output.",
+    icon: <Layers className="h-4 w-4 text-[#2563EB]" />,
+  },
+  {
+    field: "LinkedIn Profile URL (Optional)",
+    desc: "Direct social profiles to facilitate multi-channel touchpoints and warming.",
+    icon: <Share2 className="h-4 w-4 text-[#2563EB]" />,
+  },
+]
+
+const COMPARISON_ROWS = [
+  {
+    feature: "Data Accuracy",
+    advantage: "95% verified + quarterly refresh",
+    competitor: "65% - 75% average (rapid domain decay)",
+  },
+  {
+    feature: "Compliance",
+    advantage: "100% GDPR & CCPA Compliant",
+    competitor: "Unvetted lists with heavy legal liabilities",
+  },
+  {
+    feature: "Customization",
+    advantage: "Filter by 50+ criteria",
+    competitor: "Pre-packaged lists with static exports only",
+  },
+  {
+    feature: "Delivery Time",
+    advantage: "24–48 hours",
+    competitor: "5 to 7 business days or slow automated extraction",
+  },
+  {
+    feature: "Sample Available",
+    advantage: "Yes – Free custom sample on request",
+    competitor: "Paid samples only or generic dummy files",
+  },
+  {
+    feature: "Support",
+    advantage: "Dedicated account manager",
+    competitor: "Automated ticketing portals and support queues",
+  },
+]
+
+const KEY_BENEFITS = [
+  {
+    title: "Reduce Bounce Rates Dramatically",
+    desc: "Our double-verified data lowers marketing bounce rates under 5%, keeping your sender domain reputational score clean.",
+  },
+  {
+    title: "Reach Actual Decision-Makers",
+    desc: "Bypass standard gatekeepers and cold switchboards to pitch C-suite, operations, and procurement heads directly.",
+  },
+  {
+    title: "Shorten Sales Cycles",
+    desc: "Engage prospects who have direct purchasing authority and active project requirements in their factories.",
+  },
+  {
+    title: "Scale Outreach Confidently",
+    desc: "Inject verified, clean data regularly into your outbound engines to fuel robust, long-term pipelines.",
+  },
+  {
+    title: "Stay Fully Compliant",
+    desc: "Maintain strict compliance standards. All contact profiles are fully aligned with international data laws.",
+  },
+]
+
+const WHO_SHOULD_USE = [
+  {
+    name: "B2B SaaS & Software Companies",
+    desc: "Target manufacturers with software integrations, ERP tools, supply chain management, and IoT tracking solutions.",
+    icon: <Cpu className="h-5 w-5 text-[#2563EB]" />,
+  },
+  {
+    name: "Industrial Equipment Suppliers",
+    desc: "Pitch raw machines, high-precision tools, tooling lines, safety accessories, and heavy industrial hardware directly.",
+    icon: <Factory className="h-5 w-5 text-[#2563EB]" />,
+  },
+  {
+    name: "Raw Material & Component Providers",
+    desc: "Connect directly with purchasing directors in need of metals, chemicals, resins, fabrics, or electronics components.",
+    icon: <Layers className="h-5 w-5 text-[#2563EB]" />,
+  },
+  {
+    name: "Consulting & Service Firms",
+    desc: "Reach decision-makers in need of plant modernization, operations auditing, safety training, or ISO certifications.",
+    icon: <UserCheck className="h-5 w-5 text-[#2563EB]" />,
+  },
+  {
+    name: "Marketing Agencies Serving Manufacturers",
+    desc: "Empower your industrial client accounts with highly segmented, accurate email datasets to maximize campaign ROI.",
+    icon: <Sparkles className="h-5 w-5 text-[#2563EB]" />,
+  },
+]
+
+const RELATED_LISTS = [
+  {
+    title: "Construction Industry Email List",
+    desc: "Direct access to general contractors, project engineers, and construction directors.",
+    contacts: "5.4M+ Contacts",
+  },
+  {
+    title: "Oil & Gas Industry Email List",
+    desc: "Verified contacts across drilling, extraction, refining, and operations sectors.",
+    contacts: "3.2M+ Contacts",
+  },
+  {
+    title: "Technology Decision Makers List",
+    desc: "Reach CTOs, IT directors, and system administrators looking to purchase B2B tools.",
+    contacts: "12M+ Contacts",
+  },
+  {
+    title: "Healthcare Industry Email List",
+    desc: "NPI-verified records covering clinical administrators, doctors, and procurement teams.",
+    contacts: "9.6M+ Contacts",
+  },
+]
 
 export default function Page() {
   return (
     <>
-      {/* Schema Injection */}
+      {/* Schema Injection for SEO & GEO */}
       <Script
         id="org-schema"
         type="application/ld+json"
@@ -159,11 +334,6 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
       />
-      <Script
-        id="website-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
-      />
 
       <Navbar />
 
@@ -171,7 +341,7 @@ export default function Page() {
         id="main-content"
         className="min-h-screen overflow-hidden bg-white pt-20 text-[#0F172A]"
       >
-        {/* ─── SECTION 1: HERO ────────────────────────────────────────────── */}
+        {/* ─── SECTION 1: HERO & DATABASE HIGHLIGHTS ─────────────────────── */}
         <section
           className="relative flex min-h-[calc(100vh-80px)] items-center justify-center bg-white py-12 md:py-20"
           aria-labelledby="hero-heading"
@@ -190,7 +360,7 @@ export default function Page() {
           />
 
           <div className="z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 md:px-8 lg:grid-cols-12">
-            {/* Left: Copy */}
+            {/* Left Column: Core Copy */}
             <div className="flex flex-col gap-6 text-left lg:col-span-6">
               <div className="flex justify-start">
                 <Badge
@@ -202,50 +372,56 @@ export default function Page() {
                     />
                   }
                 >
-                  THE GLOBAL BUSINESS INTELLIGENCE NETWORK
+                  VERIFIED B2B MANUFACTURING DATABASE
                 </Badge>
               </div>
               <h1
                 id="hero-heading"
                 className="font-heading text-4xl leading-tight font-extrabold tracking-tight text-[#0F172A] md:text-5xl lg:text-6xl"
               >
-                Find Companies{" "}
+                Manufacturing Industry{" "}
                 <span className="text-[#2563EB]">
-                  Ready To Buy
-                </span>{" "}
-                Before Competitors Do.
+                  Email List 2026
+                </span>
               </h1>
+              <p className="font-heading text-lg font-bold text-slate-800 md:text-xl">
+                Verified B2B Manufacturing Contacts – 8M+ Decision Makers
+              </p>
               <p className="max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                Access verified decision-makers, technology users, healthcare
-                professionals, and business contacts across 100+ countries with
-                industry-leading accuracy.
+                Reach the right people in manufacturing — faster and with higher accuracy.
+                In an industry driven by precision, your outreach shouldn’t rely on guesswork. Our verified Manufacturing Industry Email List gives you direct access to plant managers, procurement directors, operations leaders, and C-level executives who make real purchasing decisions.
               </p>
 
               <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
                 <Link href="#contact" className="w-full sm:w-auto">
                   <Button variant="primary" size="lg" className="w-full">
-                    Get Sample Data
+                    Get Custom Quote
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </Link>
-                <Link href="#solutions" className="w-full sm:w-auto">
+                <Link href="#contact" className="w-full sm:w-auto">
                   <Button variant="secondary" size="lg" className="w-full">
-                    Explore Solutions
+                    Request Free Sample
                   </Button>
                 </Link>
               </div>
 
-              {/* Trust Indicators */}
+              {/* Database Highlights Row */}
               <div
                 className="mt-4 grid grid-cols-2 gap-6 border-t border-slate-200 pt-8 sm:grid-cols-4"
-                aria-label="Key statistics"
+                aria-label="Database Highlights"
               >
-                {HERO_STATS.map((stat) => (
+                {[
+                  { value: "8M+", label: "Verified Contacts" },
+                  { value: "150K+", label: "Companies" },
+                  { value: "95%", label: "Accuracy Rate" },
+                  { value: "May 2026", label: "Last Updated" },
+                ].map((stat) => (
                   <div key={stat.label}>
                     <p className="font-heading text-xl font-extrabold text-slate-900">
                       {stat.value}
                     </p>
-                    <p className="mt-0.5 font-mono text-[11px] tracking-wider text-slate-500 uppercase">
+                    <p className="mt-0.5 font-mono text-[10px] tracking-wider text-slate-500 uppercase">
                       {stat.label}
                     </p>
                   </div>
@@ -253,7 +429,7 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right: Dashboard Mockup & Stats Row */}
+            {/* Right Column: Dashboard Mockup & Core Stat Board */}
             <div className="flex flex-col gap-6 lg:col-span-6">
               <div
                 className="relative h-[300px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-gradient-to-b from-[#F8FAFC] to-[#F1F5F9] p-2 shadow-sm md:h-[400px]"
@@ -264,47 +440,48 @@ export default function Page() {
                   REVENUE INTELLIGENCE STREAMING
                 </div>
                 <div className="absolute right-4 bottom-4 z-10 font-mono text-[10px] text-slate-400">
-                  75M+ NODES // 95% VERIFIED
+                  8M+ MFG NODES // 95% GUARANTEE
                 </div>
                 <div className="relative h-full w-full overflow-hidden rounded-xl">
                   <Image
                     src="/hero_dashboard.png"
-                    alt="Revenue Intelligence Dashboard Mockup"
+                    alt="Manufacturing Revenue Intelligence Dashboard"
                     fill
                     priority
+                    unoptimized
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </div>
 
-              {/* Mockup Stats Row */}
+              {/* Core Advantage Stats Block */}
               <div className="grid grid-cols-3 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center shadow-xs">
                 <div>
-                  <p className="font-heading text-lg font-extrabold text-[#2563EB] md:text-xl">210%</p>
-                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Average Growth</p>
+                  <p className="font-heading text-lg font-extrabold text-[#2563EB] md:text-xl">95%</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Deliverability SLA</p>
                 </div>
                 <div className="border-x border-slate-200">
-                  <p className="font-heading text-lg font-extrabold text-slate-900 md:text-xl">75M+</p>
-                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Verified Leads</p>
+                  <p className="font-heading text-lg font-extrabold text-slate-900 md:text-xl">8M+</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Decision Makers</p>
                 </div>
                 <div>
-                  <p className="font-heading text-lg font-extrabold text-[#10B981] md:text-xl">95%</p>
-                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">Accuracy Rate</p>
+                  <p className="font-heading text-lg font-extrabold text-[#10B981] md:text-xl">100%</p>
+                  <p className="text-[10px] font-medium tracking-wide text-slate-500 uppercase">GDPR Compliant</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ─── SECTION 2: TRUST LOGOS ─────────────────────────────────────── */}
+        {/* Trust Indicators */}
         <section
           className="border-y border-slate-200 bg-[#F8FAFC] py-12"
-          aria-label="Trusted by global organizations"
+          aria-label="Trusted by global operations teams"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <p className="mb-8 text-center text-xs font-bold tracking-widest text-slate-400 uppercase">
-              Trusted by Revenue Operations at Global Leaders
+              Trusted by B2B Sales & Revenue Operations Globally
             </p>
             <div className="flex flex-wrap items-center justify-center gap-12 opacity-60 transition-opacity duration-300 hover:opacity-90 md:gap-20">
               <span className="font-heading text-lg font-extrabold tracking-widest text-slate-800 uppercase">
@@ -326,82 +503,53 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ─── SECTION 3: OUTREACH PLATFORM FEATURES ──────────────────────── */}
+        {/* ─── SECTION 2: INDUSTRIES WE COVER ────────────────────────────── */}
         <section
-          id="features"
-          className="border-t border-slate-200/80 bg-white py-20 md:py-28"
-          aria-labelledby="features-heading"
+          id="sectors"
+          className="border-b border-slate-100 bg-white py-20 md:py-28"
+          aria-labelledby="sectors-heading"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <SectionHeader
-              badge="Platform Features"
+              badge="Database Segments"
               badgeVariant="blue"
-              heading="Everything you need to scale your outreach"
-              subheading="Access the most comprehensive B2B databases with tools built for modern marketers and sales teams."
+              heading="Industries We Cover"
+              subheading="Select your target sub-sectors across four primary manufacturing domains to build customized, high-intent campaign pools."
               align="center"
               className="mx-auto mb-16 max-w-2xl"
             />
-            <h2 id="features-heading" className="sr-only">
-              Everything you need to scale your outreach
+            <h2 id="sectors-heading" className="sr-only">
+              Industries We Cover
             </h2>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  title: "75M+ Business Contacts",
-                  description: "Connect with verified decision-makers across technology, finance, healthcare, and retail sectors.",
-                  badge: "95% accuracy",
-                  icon: <Users className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-                {
-                  title: "Email Appending",
-                  description: "Enrich your outdated lists with verified direct dials, corporate email addresses, and corporate profiles.",
-                  badge: "24hr turnaround",
-                  icon: <Mail className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-                {
-                  title: "GDPR Compliant Data",
-                  description: "Full compliance under legitimate interest models, safeguarding your email deliverability and legal security.",
-                  badge: "100% compliant",
-                  icon: <Shield className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-                {
-                  title: "Advanced Segmentation",
-                  description: "Filter prospects based on company size, revenue, location, job hierarchy, and active tech stacks.",
-                  badge: "70+ filters",
-                  icon: <Filter className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-                {
-                  title: "Dedicated Account Team",
-                  description: "Receive priority support and custom data compiling from research specialists whenever you need lists.",
-                  badge: "24/7 available",
-                  icon: <UserCheck className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-                {
-                  title: "Real-Time Data Updates",
-                  description: "Never worry about domain decay. We refresh and phone-validate contact records every 30 days.",
-                  badge: "30-day refresh",
-                  icon: <LineChart className="h-5 w-5 text-[#2563EB]" />,
-                  variant: "blue",
-                },
-              ].map((feat) => (
-                <Card key={feat.title} variant="blue" className="group/feat flex flex-col justify-between hover:border-blue-300">
-                  <CardHeader className="flex flex-col gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-brand-blue transition-colors group-hover/feat:bg-blue-100">
-                      {feat.icon}
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {INDUSTRIES_COVERED.map((domain) => (
+                <Card
+                  key={domain.name}
+                  className="flex flex-col border border-slate-200/70 p-6 hover:shadow-md"
+                >
+                  <CardHeader className="p-0 pb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#2563EB]">
+                        {domain.icon}
+                      </div>
+                      <span className="rounded-full bg-slate-100 px-3 py-1 font-mono text-xs font-bold text-slate-600">
+                        {domain.count}
+                      </span>
                     </div>
-                    <div>
-                      <CardTitle className="text-base font-bold text-slate-900 group-hover/feat:text-[#2563EB]">{feat.title}</CardTitle>
-                      <CardDescription className="mt-2 text-xs leading-relaxed text-slate-500">{feat.description}</CardDescription>
-                    </div>
+                    <CardTitle className="mt-4 text-lg font-extrabold text-slate-900">
+                      {domain.name}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="mt-4 border-t border-slate-100 pt-3">
-                    <Badge variant="blue" className="text-[10px] font-bold uppercase">{feat.badge}</Badge>
+                  <CardContent className="p-0 pt-4 border-t border-slate-100">
+                    <ul className="flex flex-col gap-2.5">
+                      {domain.sectors.map((sector) => (
+                        <li key={sector} className="flex items-center gap-2.5 text-slate-700">
+                          <Check className="h-4 w-4 flex-shrink-0 text-[#10B981]" />
+                          <span className="text-sm font-medium">{sector}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </CardContent>
                 </Card>
               ))}
@@ -409,604 +557,350 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ─── SECTION 4: KEY METRICS ROW ─────────────────────────────────── */}
+        {/* ─── SECTION 3: WHAT'S INCLUDED IN EVERY RECORD ─────────────────── */}
         <section
-          className="border-y border-slate-200/80 bg-slate-50/50 py-12"
-          aria-label="Global stats scale"
-        >
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4 md:divide-x md:divide-slate-200">
-              {[
-                { value: "75M+", label: "Verified Contacts" },
-                { value: "95%", label: "Data Accuracy" },
-                { value: "500+", label: "Enterprise Clients" },
-                { value: "150+", label: "Countries Covered" },
-              ].map((metric) => (
-                <div key={metric.label} className="flex flex-col items-center justify-center">
-                  <p className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                    {metric.value}
-                  </p>
-                  <p className="mt-1.5 font-mono text-[10px] tracking-wider text-slate-400 uppercase">
-                    {metric.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── SECTION 5: 3-STEP PROCESS SECTION ──────────────────────────── */}
-        <section
-          id="process"
-          className="relative bg-white py-20 md:py-28"
-          aria-labelledby="process-heading"
+          id="records"
+          className="border-b border-slate-100 bg-[#F8FAFC] py-20 md:py-28"
+          aria-labelledby="records-heading"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <SectionHeader
-              badge="Simple Process"
+              badge="Lead Schema"
               badgeVariant="green"
-              heading="From request to results in 48 hours"
-              subheading="Our streamlined 3-step process ensures you get accurate, actionable data fast—without the complexity."
-              align="center"
-              className="mx-auto mb-20 max-w-2xl"
-            />
-            <h2 id="process-heading" className="sr-only">
-              From request to results in 48 hours
-            </h2>
-
-            <div className="flex flex-col gap-24 md:gap-32">
-              {/* Step 1 */}
-              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-                {/* Left: Image */}
-                <div className="relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:col-span-6">
-                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#2563EB] shadow-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
-                    TARGET DEFINITION
-                  </div>
-                  <div className="relative h-full w-full overflow-hidden rounded-xl">
-                    <Image
-                      src="/step1_needs.png"
-                      alt="Step 1 — Tell us what you need"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-                {/* Right: Copy */}
-                <div className="flex flex-col gap-6 text-left lg:col-span-6 lg:pl-6">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 font-mono text-xs font-bold text-[#2563EB]">1</span>
-                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#2563EB] uppercase">STEP 01</span>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-                    Tell us what you need
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-500">
-                    Share your target criteria — industry, job titles, company size, location, and any specific requirements. Our platform aligns leads directly with your criteria.
-                  </p>
-                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {[
-                      "Industry & vertical targeting",
-                      "Job title & seniority filters",
-                      "Company size & revenue range",
-                      "Geographic location",
-                    ].map((bullet) => (
-                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                        <CheckCircle className="h-4 w-4 text-[#2563EB]" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-2">
-                    <a href="#contact">
-                      <Button variant="primary" size="default">
-                        Get Started Now
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-                {/* Left: Copy */}
-                <div className="order-2 flex flex-col gap-6 text-left lg:order-1 lg:col-span-6 lg:pr-6">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 font-mono text-xs font-bold text-[#10B981]">2</span>
-                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#10B981] uppercase">STEP 02</span>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-                    We verify every contact
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-500">
-                    Our research team and algorithmic engine hand-verify each contact using multiple data sources, dial tests, and strict SMTP validation protocols.
-                  </p>
-                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {[
-                      "Manual verification by experts",
-                      "Cross-reference multiple sources",
-                      "Email & phone validation",
-                      "Duplicate removal & cleanup",
-                    ].map((bullet) => (
-                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                        <CheckCircle className="h-4 w-4 text-[#10B981]" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* Right: Image */}
-                <div className="order-1 relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:order-2 lg:col-span-6">
-                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#10B981] shadow-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-                    VERIFICATION PROCESS
-                  </div>
-                  <div className="relative h-full w-full overflow-hidden rounded-xl">
-                    <Image
-                      src="/step2_verification.png"
-                      alt="Step 2 — We verify every contact"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-                {/* Left: Image */}
-                <div className="relative h-[250px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50 p-2 shadow-xs md:h-[350px] lg:col-span-6">
-                  <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-slate-200/50 bg-white/90 px-3 py-1 font-mono text-[9px] text-[#2563EB] shadow-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
-                    DATA FULFILLMENT
-                  </div>
-                  <div className="relative h-full w-full overflow-hidden rounded-xl">
-                    <Image
-                      src="/step3_delivery.png"
-                      alt="Step 3 — Receive your data"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-                {/* Right: Copy */}
-                <div className="flex flex-col gap-6 text-left lg:col-span-6 lg:pl-6">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 font-mono text-xs font-bold text-[#2563EB]">3</span>
-                    <span className="font-mono text-[10px] font-bold tracking-widest text-[#2563EB] uppercase">STEP 03</span>
-                  </div>
-                  <h3 className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-                    Receive your data
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-500">
-                    Get your custom-built contact list delivered safely in your preferred format. Connect directly to export leads into your connected CRM workspace.
-                  </p>
-                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {[
-                      "Multiple export formats",
-                      "Direct CRM integration",
-                      "Detailed contact profiles",
-                      "Ready to use immediately",
-                    ].map((bullet) => (
-                      <li key={bullet} className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                        <CheckCircle className="h-4 w-4 text-[#2563EB]" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── SECTION 6: WHY CHOOSE ALIGNDATA ────────────────────────────── */}
-        <section
-          id="why-choose"
-          className="border-t border-slate-200/80 bg-slate-50/50 py-20 md:py-28"
-          aria-labelledby="why-heading"
-        >
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <div className="flex flex-col justify-between gap-8 border-b border-slate-200 pb-12 lg:flex-row lg:items-end">
-              <div className="max-w-2xl text-left">
-                <div className="flex justify-start">
-                  <Badge variant="blue" className="mb-4">Our Advantages</Badge>
-                </div>
-                <h2 id="why-heading" className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                  Why Choose Aligndata
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                  Real researchers verify every contact. Higher deliverability, better response rates, and measurable ROI.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-6 md:gap-12">
-                <div>
-                  <p className="font-heading text-2xl font-extrabold text-[#2563EB] md:text-3xl">210%</p>
-                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Avg ROI</p>
-                </div>
-                <div className="border-l border-slate-200 pl-6 md:pl-12">
-                  <p className="font-heading text-2xl font-extrabold text-slate-900 md:text-3xl">98%</p>
-                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Deliverability</p>
-                </div>
-                <div className="border-l border-slate-200 pl-6 md:pl-12">
-                  <p className="font-heading text-2xl font-extrabold text-[#10B981] md:text-3xl">4.9/5</p>
-                  <p className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Rating</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  title: "Hand-Verified Accuracy",
-                  description: "Unlike static lists, our active contact database is phone-vetted by real researchers, securing 95% validity.",
-                  badge: "95% verified",
-                  icon: <Award className="h-5 w-5 text-[#2563EB]" />,
-                },
-                {
-                  title: "Always Fresh",
-                  description: "We update, clean, and ping inboxes on a continuous cycle, running a full refresh every 30 days.",
-                  badge: "30-day refresh",
-                  icon: <RefreshCw className="h-5 w-5 text-[#2563EB]" />,
-                },
-                {
-                  title: "Dedicated Support",
-                  description: "Receive direct, customized compiler support and target ICP reviews from dedicated data specialists.",
-                  badge: "24/7 available",
-                  icon: <UserCheck className="h-5 w-5 text-[#2563EB]" />,
-                },
-                {
-                  title: "48-Hour Delivery",
-                  description: "No endless queues. Get your custom verified email lists compiled and pushed directly in less than 48 hours.",
-                  badge: "24hr turnaround",
-                  icon: <Clock className="h-5 w-5 text-[#2563EB]" />,
-                },
-                {
-                  title: "GDPR Compliant",
-                  description: "Rest easy knowing your prospecting practices align perfectly with international compliance laws (GDPR, CCPA).",
-                  badge: "100% compliant",
-                  icon: <Shield className="h-5 w-5 text-[#2563EB]" />,
-                },
-                {
-                  title: "Free Monthly Updates",
-                  description: "We automatically scan and push missing target contacts and job updates for the life of your campaign.",
-                  badge: "Free updates",
-                  icon: <Zap className="h-5 w-5 text-[#2563EB]" />,
-                },
-              ].map((item) => (
-                <Card key={item.title} variant="default" className="group/why flex flex-col justify-between border-slate-200/60 p-6 hover:border-blue-300">
-                  <CardHeader className="flex flex-col gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#2563EB] transition-colors group-hover/why:bg-blue-100">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <CardTitle className="text-base font-bold text-slate-900 group-hover/why:text-[#2563EB]">{item.title}</CardTitle>
-                      <CardDescription className="mt-2 text-xs leading-relaxed text-slate-500">{item.description}</CardDescription>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="mt-4 border-t border-slate-100 pt-3">
-                    <Badge variant="blue" className="text-[10px] font-bold uppercase">{item.badge}</Badge>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── SECTION 4: INTERACTIVE DATA UNIVERSE ───────────────────────── */}
-        <section
-          className="relative border-t border-slate-200/80 bg-[#F8FAFC] py-20 md:py-28"
-          aria-labelledby="universe-heading"
-        >
-          <div
-            className="grid-bg pointer-events-none absolute inset-0 opacity-50"
-            aria-hidden="true"
-          />
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <SectionHeader
-              badge="Database Breakdown"
-              badgeVariant="green"
-              heading="Explore the Data Universe"
-              subheading="Filter and inspect our major industry verticals to view complete data fields, verified contacts, and segment reach."
-              align="left"
-              className="mb-12 max-w-2xl"
-            />
-            <h2 id="universe-heading" className="sr-only">
-              Explore the Data Universe
-            </h2>
-            <UniverseMap />
-          </div>
-        </section>
-
-        {/* ─── SECTION 5: SOLUTIONS ECOSYSTEM ─────────────────────────────── */}
-        <section
-          id="solutions"
-          className="border-t border-slate-200/80 bg-white py-20 md:py-28"
-          aria-labelledby="solutions-heading"
-        >
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <SectionHeader
-              badge="Custom Data Deliverables"
-              badgeVariant="blue"
-              heading="Tailored Intelligence for Every Outreach Channel"
-              subheading="Choose the exact segment library to support your sales operations, marketing campaigns, and hiring directives."
+              heading="What’s Included in Every Contact Record"
+              subheading="Every download is fully enriched with multi-channel criteria to deliver high-quality target accounts for sales development."
               align="center"
               className="mx-auto mb-16 max-w-2xl"
             />
-            <h2 id="solutions-heading" className="sr-only">
-              Data Solutions
-            </h2>
-
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {ALL_SOLUTIONS.map((solution, i) => (
-                <SolutionCard
-                  key={solution.slug}
-                  icon={
-                    SOLUTION_ICON_MAP[solution.slug] ?? (
-                      <Database className="h-5 w-5" />
-                    )
-                  }
-                  title={solution.name}
-                  description={(() => {
-                    const descriptions: Record<string, string> = {
-                      "technology-users-database":
-                        "Locate accounts using AWS, Shopify, Salesforce, GCP, or other cloud software tools. Filter by technographic signatures.",
-                      "healthcare-database":
-                        "NPI-verified listings for clinical directors, head practitioners, surgeons, and administrators in top hospitals.",
-                      "professional-email-lists":
-                        "Corporate contact listings segmented by job title hierarchy (C-level, VP, Director) and decision authority.",
-                      "industry-databases":
-                        "Target database sections representing construction, finance, retail, and manufacturing sectors.",
-                      "data-appending":
-                        "Upload your outdated prospect databases. We enrich empty spaces, verify old emails, and supply direct phone lines.",
-                      "regional-databases":
-                        "Geo-targeted contacts across 100+ countries. Filter leads based on state, country, or continental operations.",
-                    }
-                    return descriptions[solution.slug] ?? solution.subtitle
-                  })()}
-                  coverage={solution.coverageStat}
-                  href={`/solutions/${solution.slug}`}
-                  variant={i % 2 === 0 ? "blue" : "green"}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── SECTION 6: INDUSTRIES SERVED ───────────────────────────────── */}
-        <section
-          id="industries"
-          className="border-t border-slate-200 bg-slate-50 py-20 md:py-28"
-          aria-labelledby="industries-heading"
-        >
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <SectionHeader
-              badge="Target Verticals"
-              badgeVariant="green"
-              heading="Deep Global Coverage Across Core Verticals"
-              subheading="Connect with executives in niche business categories worldwide with high data verification confidence."
-              align="center"
-              className="mx-auto mb-16 max-w-2xl"
-            />
-            <h2 id="industries-heading" className="sr-only">
-              Industries Served
+            <h2 id="records-heading" className="sr-only">
+              Data Fields Included in Every Contact Record
             </h2>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {INDUSTRIES.map((industry) => (
-                <IndustryCard
-                  key={industry.name}
-                  icon={
-                    INDUSTRY_ICON_MAP[industry.icon] ?? (
-                      <Shield className="h-5 w-5" />
-                    )
-                  }
-                  name={industry.name}
-                  description={industry.description}
-                  contactCount={industry.contactCount}
-                  variant={industry.variant}
-                />
+              {RECORD_FIELDS.map((item) => (
+                <div
+                  key={item.field}
+                  className="rounded-xl border border-slate-200/50 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-sm"
+                >
+                  <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[#2563EB]">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">
+                    {item.field}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    {item.desc}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ─── SECTION 7: COMPARISON TABLE ────────────────────────────────── */}
+        {/* ─── SECTION 4: WHY CHOOSE ALIGNDATA (COMPARISON) ────────────────── */}
         <section
           id="comparison"
-          className="border-t border-slate-200 bg-white py-20 md:py-28"
+          className="border-b border-slate-100 bg-white py-20 md:py-28"
           aria-labelledby="comparison-heading"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <SectionHeader
-              badge="Competitor Comparison"
+              badge="Vendor Comparison"
               badgeVariant="blue"
-              heading="Not Just a Database. An Intelligence Network."
-              subheading="Why global revenue teams migrate from legacy platforms to Aliign Data."
+              heading="Why Choose Aligndata’s Manufacturing Database?"
+              subheading="See how Aligndata's verified decision maker lists outperform generic, scraped email databases."
               align="center"
               className="mx-auto mb-16 max-w-2xl"
             />
             <h2 id="comparison-heading" className="sr-only">
-              Why Choose Aliign Data
+              Aligndata Manufacturing Email Database Advantage
             </h2>
-            <ComparisonTable />
+
+            <div className="relative w-full overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <table className="block w-full text-left md:table md:min-w-[800px] md:border-collapse">
+                <thead className="hidden md:table-header-group">
+                  <tr className="border-b border-slate-200 bg-slate-50">
+                    <th className="w-1/3 p-5 text-xs font-bold tracking-widest text-slate-500 uppercase">
+                      Evaluation Feature
+                    </th>
+                    <th className="relative w-1/3 p-5">
+                      <div className="pointer-events-none absolute -inset-y-1 right-0 left-0 border-x border-blue-100/50 bg-blue-50/50" />
+                      <div className="relative z-10 flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-[#10B981]" />
+                        <span className="font-heading text-base font-extrabold tracking-tight text-slate-900">
+                          Aligndata Advantage
+                        </span>
+                        <span className="ml-1 rounded border border-emerald-100 bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold tracking-wider text-emerald-700 uppercase">
+                          Elite SLA
+                        </span>
+                      </div>
+                    </th>
+                    <th className="w-1/3 p-5 text-sm font-semibold text-slate-500">
+                      Traditional Data Vendors
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="block divide-y divide-slate-100 md:table-row-group">
+                  {COMPARISON_ROWS.map((row, index) => (
+                    <tr
+                      key={index}
+                      className="block p-5 transition-colors hover:bg-slate-50/30 md:table-row md:p-0"
+                    >
+                      {/* Feature name */}
+                      <td className="mb-2 block md:mb-0 md:table-cell md:p-5">
+                        <h4 className="text-sm font-bold text-slate-900">
+                          {row.feature}
+                        </h4>
+                      </td>
+
+                      {/* Aligndata Advantage */}
+                      <td className="relative mb-3 block md:mb-0 md:table-cell md:p-5">
+                        <div className="pointer-events-none absolute -inset-y-2 right-0 left-0 hidden border-x border-blue-100/25 bg-blue-50/20 md:block" />
+                        <div className="mb-1 text-[9px] font-bold tracking-wider text-[#10B981] uppercase md:hidden">
+                          Aligndata Advantage
+                        </div>
+                        <div className="relative z-10 flex items-start gap-2.5">
+                          <div className="mt-0.5 flex-shrink-0 rounded border border-emerald-100 bg-emerald-50 p-0.5 text-emerald-600">
+                            <Check className="h-3.5 w-3.5 stroke-[3]" />
+                          </div>
+                          <span className="text-sm font-semibold text-slate-800">
+                            {row.advantage}
+                          </span>
+                        </div>
+                      </td>
+
+                      {/* Competitor Value */}
+                      <td className="block md:table-cell md:p-5">
+                        <div className="mb-1 text-[9px] font-bold tracking-wider text-slate-400 uppercase md:hidden">
+                          Traditional Vendors
+                        </div>
+                        <div className="flex items-start gap-2.5">
+                          <span className="text-sm text-slate-500">
+                            {row.competitor}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* Bottom SLA disclaimer banner */}
+              <div className="flex flex-col gap-2 border-t border-slate-200 bg-slate-50 p-4 font-mono text-[10px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Shield className="h-3.5 w-3.5 text-[#2563EB]" />
+                  95% GUARANTEED REACH ACCURACY & FREE REPLACEMENT SLA
+                </div>
+                <div className="flex items-center gap-1">
+                  <Sparkles className="h-3.5 w-3.5 text-[#10B981]" />
+                  GDPR & CCPA COMPLIANCE ASSURED
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ─── SECTION 8: CUSTOMER RESULTS ────────────────────────────────── */}
+        {/* ─── SECTION 5: DATA SOURCES & KEY BENEFITS ────────────────────── */}
         <section
-          id="results"
-          className="border-t border-slate-200 bg-[#F8FAFC] py-20 md:py-28"
-          aria-labelledby="results-heading"
+          id="benefits"
+          className="border-b border-slate-100 bg-[#F8FAFC] py-20 md:py-28"
+          aria-labelledby="benefits-heading"
+        >
+          <div className="z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 md:px-8 lg:grid-cols-12">
+            {/* Left: Sources */}
+            <div className="flex flex-col gap-6 text-left lg:col-span-5">
+              <Badge variant="blue" className="w-fit">Verified Data Integrity</Badge>
+              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+                Data Sources
+              </h2>
+              <p className="text-base leading-relaxed text-slate-600">
+                We combine multiple trusted sources to build an accurate manufacturing network: manufacturing associations, trade shows (IMTS, Hannover Messe), public regulatory filings, industrial directories, and our proprietary direct research with real-time SMTP validation.
+              </p>
+              <div className="relative mt-2 h-[200px] w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-1 shadow-xs">
+                <Image
+                  src="/step2_verification.png"
+                  alt="Multi-stage validation process mockup"
+                  fill
+                  unoptimized
+                  className="object-cover rounded-xl"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              </div>
+            </div>
+
+            {/* Right: Key Benefits */}
+            <div className="flex flex-col gap-6 text-left lg:col-span-7 lg:pl-8">
+              <Badge variant="green" className="w-fit">Campaign Performance</Badge>
+              <h2 id="benefits-heading" className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+                Key Benefits of Using Our Manufacturing List
+              </h2>
+              <div className="flex flex-col gap-5 mt-4">
+                {KEY_BENEFITS.map((benefit, idx) => (
+                  <div key={idx} className="flex gap-4">
+                    <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                      <Check className="h-4 w-4 stroke-[3]" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-950">
+                        {benefit.title}
+                      </h4>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                        {benefit.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 6: WHO SHOULD USE THIS MANUFACTURING EMAIL LIST ──────── */}
+        <section
+          id="audience"
+          className="border-b border-slate-100 bg-white py-20 md:py-28"
+          aria-labelledby="audience-heading"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <SectionHeader
-              badge="Impact Studies"
-              badgeVariant="green"
-              heading="Revenue Outcomes Powered by Precision Data"
-              subheading="See how enterprise sales and marketing operations unlock real pipeline numbers."
-              align="left"
-              className="mb-16 max-w-2xl"
+              badge="ICP Alignment"
+              badgeVariant="blue"
+              heading="Who Should Use This Manufacturing Email List?"
+              subheading="Unlock immediate pipeline values across these critical sectors by targeting pre-qualified purchasing authorities."
+              align="center"
+              className="mx-auto mb-16 max-w-2xl"
             />
-            <h2 id="results-heading" className="sr-only">
-              Customer Results
+            <h2 id="audience-heading" className="sr-only">
+              Target Audience for Manufacturing Email List
             </h2>
 
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              {TESTIMONIALS.map((t) => (
-                <TestimonialCard key={t.authorCompany} {...t} />
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {WHO_SHOULD_USE.map((item) => (
+                <Card
+                  key={item.name}
+                  className="flex flex-col justify-between border border-slate-200/60 p-6 hover:shadow-md"
+                >
+                  <CardHeader className="p-0">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#2563EB]">
+                      {item.icon}
+                    </div>
+                    <CardTitle className="mt-4 text-base font-bold text-slate-900 leading-tight">
+                      {item.name}
+                    </CardTitle>
+                    <CardDescription className="mt-2 text-xs leading-relaxed text-slate-500">
+                      {item.desc}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="mt-6 p-0 border-t border-slate-100 pt-3">
+                    <Link href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-[#2563EB] hover:text-blue-700">
+                      Target this Segment
+                      <ChevronRight className="h-3 w-3" />
+                    </Link>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ─── SECTION 9: GLOBAL COVERAGE ─────────────────────────────────── */}
+        {/* ─── SECTION 7: INTERACTIVE GLOBE ───────────────────────────────── */}
         <section
-          className="border-t border-slate-200 bg-white py-20 md:py-28"
-          aria-label="Global coverage map"
+          className="border-b border-slate-100 bg-[#F8FAFC] py-20 md:py-28"
+          aria-label="Global data coverage network"
         >
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <InteractiveGlobe />
           </div>
         </section>
 
-        {/* ─── SECTION 10: COMPLIANCE & SECURITY ──────────────────────────── */}
+        {/* ─── SECTION 8: FREQUENTLY ASKED QUESTIONS ──────────────────────── */}
         <section
-          id="compliance"
-          className="relative border-t border-slate-200 bg-[#F8FAFC] py-20 md:py-28"
-          aria-labelledby="compliance-heading"
+          id="faq"
+          className="border-b border-slate-100 bg-white py-20 md:py-28"
+          aria-labelledby="faq-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
             <SectionHeader
-              badge="Data Integrity"
+              badge="FAQ"
               badgeVariant="blue"
-              heading="Enterprise-Grade Privacy & Compliance Built-In"
-              subheading="Reach prospects with confidence. Our databases align fully with international data governance regulations."
+              heading="Frequently Asked Questions"
+              subheading="Everything you need to know about our verified B2B manufacturing database and compliance policies."
               align="center"
               className="mx-auto mb-16 max-w-2xl"
             />
-            <h2 id="compliance-heading" className="sr-only">
-              Compliance & Security
+            <h2 id="faq-heading" className="sr-only">
+              Frequently Asked Questions About Manufacturing Email List
+            </h2>
+            <FAQSection faqs={MANUFACTURING_FAQS} />
+          </div>
+        </section>
+
+        {/* ─── SECTION 9: GET CUSTOM QUOTE FORM ───────────────────────────── */}
+        <CTASection
+          id="contact"
+          layout="split"
+          badge="Custom Data Quote"
+          badgeVariant="green"
+          heading="Ready to Get Your Custom Manufacturing List?"
+          description="Fill out the form and receive a tailored quote within 24 hours. Specify your ideal manufacturing sub-sectors and job titles below."
+          bullets={[
+            "Free custom sample sheet delivered within 24 hours",
+            "95% verified email deliverability contract SLA",
+            "Compliant GDPR & CCPA contact list compilation",
+          ]}
+          defaultSolution="Industry databases"
+        />
+
+        {/* ─── SECTION 10: RELATED EMAIL LISTS ────────────────────────────── */}
+        <section
+          id="related-lists"
+          className="border-t border-slate-200 bg-white py-20 md:py-28"
+          aria-labelledby="related-heading"
+        >
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <SectionHeader
+              badge="Extended Databases"
+              badgeVariant="blue"
+              heading="Related Email Lists"
+              subheading="Expand your multi-channel marketing campaigns into adjacent high-intent industrial sectors."
+              align="center"
+              className="mx-auto mb-16 max-w-2xl"
+            />
+            <h2 id="related-heading" className="sr-only">
+              Explore Related Industrial B2B Email Lists
             </h2>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {COMPLIANCE_ITEMS.map((item) => (
-                <Card key={item.title} variant={item.variant}>
-                  <CardHeader>
-                    <div
-                      className={`mb-2 flex h-9 w-9 items-center justify-center rounded-lg ${
-                        item.variant === "green"
-                          ? "bg-brand-green/10 text-brand-green"
-                          : "bg-brand-blue/10 text-brand-blue"
-                      }`}
+              {RELATED_LISTS.map((list) => (
+                <div
+                  key={list.title}
+                  className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/70 bg-white p-6 transition-all duration-300 hover:shadow-md"
+                >
+                  <div>
+                    <span className="inline-block rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-500 uppercase tracking-wide">
+                      {list.contacts}
+                    </span>
+                    <h3 className="mt-4 text-base font-bold text-slate-900 leading-tight">
+                      {list.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                      {list.desc}
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <Link
+                      href="#contact"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#2563EB] group-hover:text-blue-700"
                     >
-                      <Lock className="h-4 w-4" aria-hidden="true" />
-                    </div>
-                    <CardTitle className="text-sm">{item.title}</CardTitle>
-                    <CardDescription>{item.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="mt-2">
-                    <div className="font-mono text-[10px] text-gray-500">
-                      {item.region}
-                    </div>
-                  </CardContent>
-                </Card>
+                      Request Quote
+                      <ChevronRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
-
-        {/* ─── SECTION 11: GET A CUSTOM QUOTE CALLOUT ────────────────────── */}
-        <section
-          className="border-t border-slate-200 bg-white py-20"
-          aria-labelledby="quote-heading"
-        >
-          <div className="mx-auto max-w-5xl px-6 md:px-8">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-gradient-to-br from-slate-50/80 to-blue-50/40 p-8 text-center shadow-xs md:p-12">
-              {/* Mesh blur */}
-              <div className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 rounded-full bg-blue-100/50 blur-[60px]" />
-              <div className="pointer-events-none absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-emerald-100/30 blur-[60px]" />
-
-              <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6">
-                <h3 id="quote-heading" className="font-heading text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-                  Get a custom quote tailored to your needs
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-500">
-                  Connect with our team to discuss your data requirements. We'll provide a detailed quote and show you the exact data completeness and quality you can expect within 24–48 hours.
-                </p>
-
-                <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
-                  <a href="#contact">
-                    <Button variant="primary" size="default">
-                      Get Quote
-                    </Button>
-                  </a>
-                  <a href="#contact">
-                    <Button variant="secondary" size="default">
-                      Talk to the Team
-                    </Button>
-                  </a>
-                </div>
-
-                <div className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 text-[10px] font-bold text-slate-600 sm:grid-cols-4">
-                  {[
-                    "95% accuracy guarantee",
-                    "24–48h delivery",
-                    "GDPR/CCPA/CASL compliant",
-                    "Custom targeting options",
-                  ].map((check) => (
-                    <div key={check} className="flex items-center justify-center gap-1.5">
-                      <Check className="h-3.5 w-3.5 text-[#10B981]" />
-                      <span className="uppercase tracking-wider">{check}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── SECTION 12: FAQ ─────────────────────────────────────────────── */}
-        <section
-          id="faq"
-          className="border-t border-slate-200 bg-white py-20 md:py-28"
-          aria-labelledby="faq-heading"
-        >
-          <div className="mx-auto max-w-6xl px-6 md:px-8">
-            <SectionHeader
-              badge="Clarifications"
-              badgeVariant="blue"
-              heading="Frequently Asked Questions"
-              subheading="Everything you need to know about our B2B intelligence network, accuracy verification systems, and compliance frameworks."
-              align="center"
-              className="mb-16 max-w-3xl mx-auto"
-            />
-            <h2 id="faq-heading" className="sr-only">
-              Frequently Asked Questions
-            </h2>
-            <FAQSection faqs={HOMEPAGE_FAQS} />
-          </div>
-        </section>
-
-        {/* ─── SECTION 12: FINAL CTA ───────────────────────────────────────── */}
-        <CTASection
-          id="contact"
-          layout="split"
-          badge="Secure Your Target Accounts"
-          badgeVariant="green"
-          heading="Start Building Smarter Revenue Pipelines Today"
-          description="Submit your custom ideal customer profile requirements. Our verification specialists will run validation algorithms and email you a free sample contact segment sheet within hours."
-          bullets={[
-            "Free, phone-verified custom sample lists (no subscription required)",
-            "95% transactional email delivery SLA contract",
-            "Compliant GDPR/CCPA consumer registry check",
-          ]}
-        />
       </main>
 
       <Footer />

@@ -70,8 +70,6 @@ export default function ComparisonTable() {
 
   return (
     <div className="relative w-full overflow-x-auto rounded-2xl border border-slate-200/60 bg-white shadow-sm">
-      {/* Decorative side accent blur */}
-      <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-[#2563EB] to-[#10B981]" />
 
       <table className="block w-full text-left md:table md:min-w-[800px] md:border-collapse">
         <thead className="hidden md:table-header-group">

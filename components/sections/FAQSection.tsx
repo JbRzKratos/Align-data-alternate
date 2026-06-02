@@ -29,7 +29,7 @@ export default function FAQSection({ faqs, className }: FAQSectionProps) {
       key={faq.q}
       value={faq.q}
       className={cn(
-        "bg-transparent px-4 md:rounded-2xl md:border md:border-slate-200/80 md:bg-white md:px-6 md:py-1 md:shadow-[0_4px_20px_rgb(0,0,0,0.03)] md:transition-all md:hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] md:hover:border-blue-100",
+        "bg-transparent px-4 md:rounded-2xl md:border md:border-slate-200/80 md:bg-white md:px-6 md:py-1 md:shadow-[0_4px_20px_rgb(0,0,0,0.03)] md:transition-all md:hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)]",
         index === total - 1 ? "border-b-0 md:border" : "border-b border-slate-200/60 md:border"
       )}
     >
